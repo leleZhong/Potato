@@ -6,32 +6,27 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager _instance;
+    public static GameManager Instance;
     public TalkManager talkManager;
     public Text _talkText;
     public GameObject _panel;
     public GameObject _scanObject;
     public bool _isAction;
-    int _talkIndex;
+    public int _talkIndex;
 
     void Awake()
     {
-        _instance = this;
+        Instance = this;
     }
 
     public void Action(GameObject scanObj)
     {
-        if (_isAction) // Exit Action
-        {
-            _isAction = false;
-        } else  // Enter Action
-        {
-            _panel.SetActive(true);
-            _scanObject = scanObj;
-            
-            ObjData objData = _scanObject.GetComponent<ObjData>();
-            TalkManager(objData.IsDestroyed, objData.isNPC);
-        }
+        
+        _isAction = true;
+        _scanObject = scanObj;
+        ObjData objData = _scanObject.GetComponent<ObjData>();
+        
+        Talk(objData._id, objData._isNPC);
         _panel.SetActive(_isAction);
     }
     void Talk(int id, bool isNPC)
@@ -42,6 +37,7 @@ public class GameManager : MonoBehaviour
         {
             _isAction = false;
             _talkIndex = 0; // 대화가 끝날 때 0으로 초기화
+            _panel.SetActive(_isAction);
             return;
         }
 

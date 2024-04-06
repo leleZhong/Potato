@@ -5,12 +5,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float _speed;
-    public GameManager _manager;
 
     void Update()
     {
-        float h = _manager._isAction ? 0 : Input.GetAxisRaw("Horizontal");
-        float v = _manager._isAction ? 0 : Input.GetAxisRaw("Vertical");
+        float h = GameManager.Instance._isAction ? 0 : Input.GetAxisRaw("Horizontal");
+        float v = GameManager.Instance._isAction ? 0 : Input.GetAxisRaw("Vertical");
         Vector3 nextPos = new Vector3(h, 0, v) * _speed * Time.deltaTime;
         Vector3 currentPos = transform.position + nextPos;
 
@@ -19,8 +18,17 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
 
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                GameObject clickedObject = hit.transform.gameObject;
+                ObjData objData = clickedObject.GetComponent<ObjData>();
+                
+                if (objData != null) // ObjData 컴포넌트가 있는 경우만 Action을 실행
+                {
+                    GameManager.Instance.Action(clickedObject);
+                }
+            }
         }
     }
 }
