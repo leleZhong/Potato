@@ -5,5 +5,5 @@ using UnityEngine;
 public class ObjData : MonoBehaviour
 {
     public int _id;
-    public bool _isNPC;
+    public bool _isBtn;
 }

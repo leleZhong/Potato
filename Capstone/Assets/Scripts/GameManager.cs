@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+
+    public bool _isAction;
+
     public TalkManager talkManager;
     public Text _talkText;
     public GameObject _panel;
     public GameObject _scanObject;
-    public bool _isAction;
     public int _talkIndex;
+
+    public StageManager stageManager;
 
     void Awake()
     {
@@ -26,10 +31,17 @@ public class GameManager : MonoBehaviour
         _scanObject = scanObj;
         ObjData objData = _scanObject.GetComponent<ObjData>();
         
-        Talk(objData._id, objData._isNPC);
-        _panel.SetActive(_isAction);
+        if (objData._isBtn)
+        {
+            stageManager.ChangeColor(objData._id);
+        }
+        else
+        {
+            Talk(objData._id);
+            _panel.SetActive(_isAction);
+        }
     }
-    void Talk(int id, bool isNPC)
+    void Talk(int id)
     {
         string talkData = talkManager.GetTalk(id, _talkIndex);
 
@@ -40,15 +52,9 @@ public class GameManager : MonoBehaviour
             _panel.SetActive(_isAction);
             return;
         }
-
-        if (isNPC)
-        {
-            _talkText.text = talkData;
-        } else
-        {
-            _talkText.text = talkData;
-        }
-
+        
+        _talkText.text = talkData;
+        
         _isAction = true;
         _talkIndex++;
     }
