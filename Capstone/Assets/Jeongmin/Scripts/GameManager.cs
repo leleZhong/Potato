@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using Unity.VisualScripting;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+
+    public bool _isConnect = false;
+    public Transform[] _spawnPoints;
 
     public bool _isAction;
 
@@ -22,6 +25,19 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        StartCoroutine(CreatePlayer());
+    }
+
+    IEnumerator CreatePlayer()
+    {
+        yield return new WaitUntil(() => _isConnect);
+
+        _spawnPoints = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
+
+        Vector3 pos = _spawnPoints[PhotonNetwork.CurrentRoom.PlayerCount].position;
+        Quaternion rot = _spawnPoints[PhotonNetwork.CurrentRoom.PlayerCount].rotation;
+
+        GameObject playerTemp = PhotonNetwork.Instantiate("Player", pos, rot, 0);
     }
 
     public void Action(GameObject scanObj)
@@ -33,7 +49,7 @@ public class GameManager : MonoBehaviour
         
         if (objData._isBtn)
         {
-            stageManager.ChangeColor(objData._id);
+            stageManager.ButtonClick(objData._id);
         }
         else
         {

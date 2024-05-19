@@ -7,6 +7,7 @@ TagManager:
   - Floor
   - npc
   - obj
+  - portal
   layers:
   - Default
   - TransparentFX
