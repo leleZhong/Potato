@@ -11,6 +11,9 @@ TagManager:
   - ball
   - hole
   - Wall
+  - Block
+  - Interaction
+  - CorrectNumber
   layers:
   - Default
   - TransparentFX
