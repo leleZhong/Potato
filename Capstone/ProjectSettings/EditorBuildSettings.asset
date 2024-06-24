@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Jeongmin/Scenes/Start.unity
+    path: Assets/0_Scenes/Main.unity
     guid: 8ff826b4fb120694689749a396e5823e
   - enabled: 1
-    path: Assets/Jeongmin/Scenes/Jeongmin.unity
+    path: Assets/0_Scenes/Stage1_JM.unity
     guid: 9ab61a2b153db9243bbfcdb11180d90b
   m_configObjects: {}
