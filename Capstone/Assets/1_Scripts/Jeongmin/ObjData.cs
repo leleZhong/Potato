@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class ObjData : MonoBehaviour
 {
+    public enum GameObjectTypes
+    {
+        NPC,
+        Button,
+    }
+
+    public GameObjectTypes _type;
     public int _id;
     public bool _isBtn;
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
@@ -52,15 +53,17 @@ public class GameManager : MonoBehaviour
         _isAction = true;
         _scanObject = scanObj;
         ObjData objData = _scanObject.GetComponent<ObjData>();
-        
-        if (objData._isBtn)
+        ObjData.GameObjectTypes type = objData._type;
+
+        switch (type)
         {
-            stageManager.ButtonClick(objData._id);
-        }
-        else
-        {
-            Talk(objData._id);
-            _panel.SetActive(_isAction);
+            case ObjData.GameObjectTypes.NPC:
+                Talk(objData._id);
+                _panel.SetActive(_isAction);
+                break;
+            case ObjData.GameObjectTypes.Button:
+                stageManager.ButtonClick(objData._id);
+                break;
         }
     }
     void Talk(int id)
