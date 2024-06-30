@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
@@ -52,6 +53,7 @@ public class GameManager : MonoBehaviour
         _isAction = true;
         _scanObject = scanObj;
         ObjData objData = _scanObject.GetComponent<ObjData>();
+        ObjData.GameObjectTypes type = objData._type;
         
         if (objData._isBtn)
         {
