@@ -54,15 +54,16 @@ public class GameManager : MonoBehaviour
         _scanObject = scanObj;
         ObjData objData = _scanObject.GetComponent<ObjData>();
         ObjData.GameObjectTypes type = objData._type;
-        
-        if (objData._isBtn)
+
+        switch (type)
         {
-            stageManager.ButtonClick(objData._id);
-        }
-        else
-        {
-            Talk(objData._id);
-            _panel.SetActive(_isAction);
+            case ObjData.GameObjectTypes.NPC:
+                Talk(objData._id);
+                _panel.SetActive(_isAction);
+                break;
+            case ObjData.GameObjectTypes.Button:
+                stageManager.ButtonClick(objData._id);
+                break;
         }
     }
     void Talk(int id)

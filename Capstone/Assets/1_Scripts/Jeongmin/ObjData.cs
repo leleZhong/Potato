@@ -6,8 +6,8 @@ public class ObjData : MonoBehaviour
 {
     public enum GameObjectTypes
     {
-        Player,
-        Object,
+        NPC,
+        Button,
     }
 
     public GameObjectTypes _type;
