@@ -41,7 +41,7 @@ public class BlockManager : MonoBehaviour
         int index2 = Random.Range(0, tower2Transforms.Length); //tower2의 012중에 어디?
         GameObject duplicatedBlock2 = Instantiate(blockPrefabs[SelectedDuplicatedNumber], tower2Transforms[index2].position, Quaternion.identity); //생성
         duplicatedBlock2.transform.parent = tower2Transforms[index2];
-        duplicatedBlock1.tag = "CorrectNumber";
+        duplicatedBlock2.tag = "CorrectNumber";
 
 
         // 타워1에 랜덤하게 그림 할당
@@ -56,7 +56,7 @@ public class BlockManager : MonoBehaviour
 
             GameObject block = Instantiate(blockPrefabs[selectedNumber], cubeTransform.position, Quaternion.identity); //선택된 블럭프리펩을 위치에 할당
             block.transform.parent = cubeTransform;
-            
+
 
             availableNumbers.RemoveAt(randomIndex); //할당된 숫자를 리스트에서 지우기
 
@@ -74,7 +74,7 @@ public class BlockManager : MonoBehaviour
 
             GameObject block = Instantiate(blockPrefabs[selectedNumber], cubeTransform.position, Quaternion.identity); //생성
             block.transform.parent = cubeTransform;
-            
+
 
             availableNumbers.RemoveAt(randomIndex);
 
