@@ -8,10 +8,17 @@ public class BlockManager : MonoBehaviour
     public Transform[] tower1Transforms; // 타워1 위치 배열
     public Transform[] tower2Transforms; // 타워2 위치 배열
     public static GameObject duplicatedBlockPrefab;
+    private Collider objectCollider;
 
     void Start()
     {
         InitializeBlocks();
+
+        objectCollider = GetComponent<Collider>();
+        if (objectCollider != null)
+        {
+            objectCollider.enabled = false; // 콜라이더 비활성화
+        }
     }
 
     void InitializeBlocks()
