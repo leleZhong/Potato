@@ -3992,6 +3992,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: character (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 355294264371175433, guid: 145ce72b7799ea24e91d61bd5cbf2087, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2430231477825731513, guid: 145ce72b7799ea24e91d61bd5cbf2087, type: 3}
+      propertyPath: animator1
+      value: 
+      objectReference: {fileID: 1696987929}
+    - target: {fileID: 2430231477825731513, guid: 145ce72b7799ea24e91d61bd5cbf2087, type: 3}
+      propertyPath: animator2
+      value: 
+      objectReference: {fileID: 791133889}
+    - target: {fileID: 2430231477825731513, guid: 145ce72b7799ea24e91d61bd5cbf2087, type: 3}
+      propertyPath: interactionUI
+      value: 
+      objectReference: {fileID: 1389517406}
     - target: {fileID: 6145452566609536094, guid: 145ce72b7799ea24e91d61bd5cbf2087, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -4014,11 +4030,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9041889915133096269, guid: 145ce72b7799ea24e91d61bd5cbf2087, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.594
+      value: 8.568
       objectReference: {fileID: 0}
     - target: {fileID: 9041889915133096269, guid: 145ce72b7799ea24e91d61bd5cbf2087, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.583
+      value: -2.584
       objectReference: {fileID: 0}
     - target: {fileID: 9041889915133096269, guid: 145ce72b7799ea24e91d61bd5cbf2087, type: 3}
       propertyPath: m_LocalRotation.w
@@ -41947,9 +41963,6 @@ MonoBehaviour:
   - {fileID: 2093371142827659934, guid: 6875d3073f2761448b00338467b4e1a5, type: 3}
   - {fileID: 4052364516579794679, guid: 45c044bbc72485247960af4641b4e209, type: 3}
   - {fileID: 1781567509440022735, guid: 16bb77bc4dbea7643bf8481b9cf0fe77, type: 3}
-  interactionUI: {fileID: 1389517406}
-  DoorOpen: {fileID: 791133889}
-  AnswerDoorOpen: {fileID: 1696987929}
 --- !u!4 &1712812850
 Transform:
   m_ObjectHideFlags: 0
@@ -45855,6 +45868,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: character
       objectReference: {fileID: 0}
+    - target: {fileID: 1016994809738423, guid: 145ce72b7799ea24e91d61bd5cbf2087, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6145452566609536094, guid: 145ce72b7799ea24e91d61bd5cbf2087, type: 3}
       propertyPath: m_IsTrigger
       value: 0
@@ -47252,7 +47269,6 @@ GameObject:
   - component: {fileID: 1925230989}
   - component: {fileID: 1925230988}
   - component: {fileID: 1925230987}
-  - component: {fileID: 1925230990}
   m_Layer: 5
   m_Name: InteractionButton
   m_TagString: Untagged
@@ -47324,9 +47340,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1925230990}
-        m_TargetAssemblyTypeName: Interaction, Assembly-CSharp
-        m_MethodName: OnClickButton
+      - m_Target: {fileID: 2430231477825731513, guid: 145ce72b7799ea24e91d61bd5cbf2087, type: 3}
+        m_TargetAssemblyTypeName: ButtonInteraction, Assembly-CSharp
+        m_MethodName: InteractWithObject
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1925230985}
@@ -47374,23 +47390,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1925230985}
   m_CullTransparentMesh: 1
---- !u!114 &1925230990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1925230985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31b21ec9d817272449edb37e2c45b37e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InterActionTransform: []
-  blockPrefabs: []
-  interactionUI: {fileID: 0}
-  DoorOpen: {fileID: 0}
-  AnswerDoorOpen: {fileID: 0}
 --- !u!1001 &1925563225
 PrefabInstance:
   m_ObjectHideFlags: 0
