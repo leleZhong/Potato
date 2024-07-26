@@ -563,10 +563,10 @@ RectTransform:
   - {fileID: 2061559710}
   m_Father: {fileID: 1468981062}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 75}
-  m_SizeDelta: {x: -800, y: -250}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 85}
+  m_SizeDelta: {x: 520, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &723178317
 MonoBehaviour:
@@ -710,6 +710,7 @@ MonoBehaviour:
   _BGMSlider: {fileID: 0}
   _effectSlider: {fileID: 0}
   _closeButton: {fileID: 0}
+  _soundManager: {fileID: 0}
 --- !u!1 &882200530
 GameObject:
   m_ObjectHideFlags: 0
@@ -853,11 +854,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _BGMList:
   - {fileID: 882200532}
-  _effectList:
-  - {fileID: 882200532}
-  _BGMClips:
-  - {fileID: 8300000, guid: 107b5df5c7d153042a947b12bee17c53, type: 3}
-  _effectClips: []
   _settings: {fileID: 801856793}
 --- !u!1 &992225595
 GameObject:
@@ -1177,10 +1173,10 @@ RectTransform:
   - {fileID: 616512205}
   m_Father: {fileID: 1468981062}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -75}
-  m_SizeDelta: {x: -800, y: -250}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -85}
+  m_SizeDelta: {x: 520, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1442561747
 MonoBehaviour:
@@ -1310,10 +1306,10 @@ RectTransform:
   - {fileID: 1442561746}
   m_Father: {fileID: 1798224801}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -150}
-  m_SizeDelta: {x: -600, y: -700}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 400}
+  m_SizeDelta: {x: 1320, y: 510.00018}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1468981063
 MonoBehaviour:
