@@ -59,6 +59,12 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("Checking if all players are ready.");
 
+        if (PhotonNetwork.CurrentRoom == null || PhotonNetwork.CurrentRoom.Players == null)
+        {
+            Debug.LogError("CurrentRoom or Players list is null.");
+            return;
+        }
+
         if (PhotonNetwork.CurrentRoom.Players.Count != 2)
         {
             Debug.Log("Not enough players in room.");
@@ -75,15 +81,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
         Debug.Log("All players ready. Starting game.");
 
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance._isConnect = true;
-            GameManager.Instance.ConnectAndCreatePlayer();
-        }
-
-        if (_mainMenu != null)
-            {
-                _mainMenu.OnLoadingFinish();
-            }
+        _mainMenu.OnLoadingFinish();
+        
+        GameManager.Instance._isConnect = true;
     }
 }

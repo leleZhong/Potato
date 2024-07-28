@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 
 public class MainMenu : MonoBehaviour
 {
@@ -13,9 +14,29 @@ public class MainMenu : MonoBehaviour
     public Text _title;
     public Text _loading;
 
+    // [튜토리얼 패널 ui]
+    [Header("[TutorialPanel UI]")]
+    public GameObject _alertPanel;
+
     void Start()
     {
         _loading.gameObject.SetActive(false);
+        _alertPanel.SetActive(false);
+    }
+
+    public void OnClickTutorial()
+    {
+        _alertPanel.SetActive(true);
+    }
+
+    public void OnClickYes()
+    {
+        SceneManager.LoadScene("Tutorial");
+    }
+
+    public void OnClickNo()
+    {
+        _alertPanel.SetActive(false);
     }
 
     public void OnClickStart()
@@ -25,9 +46,12 @@ public class MainMenu : MonoBehaviour
         StartCoroutine(ShowLoadingText());
 
         _photonManager._mainMenu = this; // PhotonManager에 UIManager를 연결
-        _photonManager.JoinRoom();
-        _photonManager.SetPlayerReady();
-    }
+
+        if (PhotonNetwork.IsConnected)
+        {
+            _photonManager.JoinRoom();
+        }
+    }   
 
     IEnumerator ShowLoadingText()
     {
@@ -49,7 +73,7 @@ public class MainMenu : MonoBehaviour
     {
         Debug.Log("OnLoadingFinish");
         _loading.gameObject.SetActive(false);
-        SceneManager.LoadScene("Jeongmin");
+        SceneManager.LoadScene("Stage1_JM");
     }
 
     public void OnClickExit()

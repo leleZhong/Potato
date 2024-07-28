@@ -8,7 +8,24 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    static GameManager _instance;
+    public static GameManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<GameManager>();
+                if (_instance == null)
+                {
+                    GameObject obj = new GameObject("GameManager");
+                    _instance = obj.AddComponent<GameManager>();
+                }
+                _instance.Initialize();
+            }
+            return _instance;
+        }
+    }
 
     public bool _isConnect = false;
     public Transform[] _spawnPoints;
@@ -25,19 +42,27 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
+        if (_instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(this.gameObject);
+
+            Initialize();
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    void Initialize()
+    {
+        ConnectAndCreatePlayer();
     }
 
     public void ConnectAndCreatePlayer()
     {
         Debug.Log("ConnectAndCreatePlayer");
-        StartCoroutine(CreatePlayer());
-    }
-
-    IEnumerator CreatePlayer()
-    {
-        Debug.Log("Waiting for connection...");
-        yield return new WaitUntil(() => _isConnect);
 
         _spawnPoints = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
 
@@ -45,7 +70,21 @@ public class GameManager : MonoBehaviour
         Quaternion rot = _spawnPoints[PhotonNetwork.CurrentRoom.PlayerCount].rotation;
 
         GameObject playerTemp = PhotonNetwork.Instantiate("Player", pos, rot, 0);
+        // StartCoroutine(CreatePlayer());
     }
+
+    // IEnumerator CreatePlayer()
+    // {
+    //     Debug.Log("Waiting for connection...");
+    //     yield return new WaitUntil(() => _isConnect);
+
+    //     _spawnPoints = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
+
+    //     Vector3 pos = _spawnPoints[PhotonNetwork.CurrentRoom.PlayerCount].position;
+    //     Quaternion rot = _spawnPoints[PhotonNetwork.CurrentRoom.PlayerCount].rotation;
+
+    //     GameObject playerTemp = PhotonNetwork.Instantiate("Player", pos, rot, 0);
+    // }
 
     public void Action(GameObject scanObj)
     {
