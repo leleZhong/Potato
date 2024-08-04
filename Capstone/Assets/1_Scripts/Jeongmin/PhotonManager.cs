@@ -8,6 +8,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public MainMenu _mainMenu;
 
     const string ReadyProperty = "IsReady";
+    bool _isConnectedToMaster = false;
 
     void Awake()
     {
@@ -21,22 +22,28 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.ConnectUsingSettings();
         }
-        DontDestroyOnLoad(gameObject); // PhotonManager 객체를 파괴하지 않도록 설정
+        transform.SetParent(null);
+        DontDestroyOnLoad(gameObject); // PhotonManager 객체�? ?��괴하�? ?��?���? ?��?��
     }
 
     public override void OnConnectedToMaster()
     {
         Debug.Log("Connected to Master");
+        _isConnectedToMaster = true;
     }
 
     public void JoinRoom()
     {
-        PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions { MaxPlayers = 2 }, null);
+        if (_isConnectedToMaster)
+            PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions { MaxPlayers = 2 }, null);
+        else
+            Debug.LogError("마스터 서버에 연결되지 않았습니다.");
     }
 
     public override void OnJoinedRoom()
     {
         Debug.Log("Joined Room");
+        GameManager.Instance._isConnect = true;
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -59,12 +66,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("Checking if all players are ready.");
 
-        if (PhotonNetwork.CurrentRoom == null || PhotonNetwork.CurrentRoom.Players == null)
-        {
-            Debug.LogError("CurrentRoom or Players list is null.");
-            return;
-        }
-
         if (PhotonNetwork.CurrentRoom.Players.Count != 2)
         {
             Debug.Log("Not enough players in room.");
@@ -81,8 +82,13 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
         Debug.Log("All players ready. Starting game.");
 
-        _mainMenu.OnLoadingFinish();
         
-        GameManager.Instance._isConnect = true;
+        GameManager.Instance.ConnectAndCreatePlayer();
+        
+
+        if (_mainMenu != null)
+            {
+                _mainMenu.OnLoadingFinish();
+            }
     }
 }
