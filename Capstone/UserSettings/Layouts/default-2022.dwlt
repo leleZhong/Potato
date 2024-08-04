@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Project
   m_RootView: {fileID: 10}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 130
+  controlID: 140
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 55
+  controlID: 59
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 129
+  controlID: 139
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -196,8 +196,8 @@ MonoBehaviour:
     y: 0
     width: 338
     height: 521
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -324,7 +324,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 32
+  controlID: 58
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -349,7 +349,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 33
+  controlID: 21
 --- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -369,8 +369,8 @@ MonoBehaviour:
     y: 0
     width: 1168
     height: 461
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
@@ -526,7 +526,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/4_Assets/Polygon Arsenal/Scripts
+    - Assets/0_Scenes
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -534,30 +534,30 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 43
   m_LastFolders:
-  - Assets/4_Assets/Polygon Arsenal/Scripts
+  - Assets/0_Scenes
   m_LastFoldersGridSize: 43
   m_LastProjectPath: C:\Users\USER\Documents\GitHub\Potato\Capstone
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 2ea00100
-    m_LastClickedID: 106542
-    m_ExpandedIDs: 00000000ec690000306a0000346a0000386a00003c6a0000426a0000746e00008a6e000098db000022a0010000ca9a3b
+    m_SelectedIDs: f0770000
+    m_LastClickedID: 30704
+    m_ExpandedIDs: 0000000096760000987600009a7600009c7600009e760000a0760000a2760000fa7700001a78000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 1_Scripts
-      m_OriginalName: 1_Scripts
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 27184
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 5}
     m_SearchString: 
@@ -571,7 +571,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000ec690000
+    m_ExpandedIDs: 0000000096760000987600009a7600009c7600009e760000a0760000a2760000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -711,9 +711,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: 40780000
       m_LastClickedID: 0
-      m_ExpandedIDs: a09cfdffb8a0fdffbea0fdffcca1fdff46a3fdff24a6fdff8eb2fdff20c8fdff5acffdffb0cffdff02eafdff2cedfdff52edfdff62f0fdffeaf5fdff8c12feff3414feff9c1dfeff121ffeff2022feff8029feffc82efeff2636feff7c36feffca50fefff053feff1254feffee5dfeff4a5efeff9478feffb87bfeffd47bfeffa692fefffc92feff4eadfeff7ab0feff9eb0feff1eb1feff52b5feff6cbdfeffc2bdfeff14d8feff40dbfeff64dbfeffdcdbfeff94e1feff60e9feffb6e9feff0404ffff2c07ffff4c07ffff9609ffff8e16ffff881fffffde1fffff143affff423dffff643dffffe23dffff1642ffff7e45ffffd445ffff0660ffff3063ffff4e63ffffde6affff346bffff7e85ffffa688ffffbe88fffff68dffffe8aeffff3eafffff88c9ffffaeccffffc8ccffffd4f3ffff3cf5fffff4ffffff129a000022b0000068c40000d2dd00002cf500003a0b0100520f01009c370100924f0100fe500100b28e0100
+      m_ExpandedIDs: 8cf5ffff22fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1143,11 +1143,11 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.3536238, y: 0.041228388, z: -0.015604014, w: -0.9343518}
     speed: 2
-    m_Value: {x: -0.35362267, y: 0.041228253, z: -0.015603963, w: -0.9343488}
+    m_Value: {x: -0.3536238, y: 0.041228388, z: -0.015604013, w: -0.93435174}
   m_Size:
-    m_Target: 10.560119
+    m_Target: 94.999825
     speed: 2
-    m_Value: 10.560119
+    m_Value: 90.90892
   m_Ortho:
     m_Target: 0
     speed: 2
