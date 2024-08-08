@@ -48,8 +48,8 @@ public class MainMenu : MonoBehaviour
         _photonManager._mainMenu = this; // PhotonManager에 UIManager를 연결
 
         _photonManager.JoinRoom();
-    
-    }   
+
+    }
 
     IEnumerator ShowLoadingText()
     {
@@ -75,10 +75,10 @@ public class MainMenu : MonoBehaviour
 
     public void OnClickExit()
     {
-        #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-        #else
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
             Application.Quit();
-        #endif
+#endif
     }
 }
