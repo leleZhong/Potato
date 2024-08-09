@@ -8,6 +8,10 @@ public class UIManager : MonoBehaviour
 {
     public Settings _settings;
 
+    // [인게임 ui]
+    [Header("[InGame UI]")]
+    public GameObject _clearGauge;
+
     // [일시정지 ui]
     [Header("[Pause UI]")]
     public GameObject _pausePanel;
@@ -32,6 +36,11 @@ public class UIManager : MonoBehaviour
                 Time.timeScale = 0f;
             }
         }
+    }
+
+    public void IncreaseGauge()
+    {
+        _clearGauge.GetComponent<Image>().fillAmount += 0.333f;
     }
 
     public void OnClickContinue()
