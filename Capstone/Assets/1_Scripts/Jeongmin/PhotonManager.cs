@@ -82,13 +82,13 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
         Debug.Log("All players ready. Starting game.");
 
-
+        
         GameManager.Instance.ConnectAndCreatePlayer();
-
+        
 
         if (_mainMenu != null)
-        {
-            _mainMenu.OnLoadingFinish();
-        }
+            {
+                _mainMenu.OnLoadingFinish();
+            }
     }
 }

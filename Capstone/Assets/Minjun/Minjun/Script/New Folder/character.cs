@@ -1,118 +1,135 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
-public class player : MonoBehaviour
+public class character : MonoBehaviour
 {
-    [SerializeField]
-    public Transform characterBody;  // 캐릭터의 본체 Transform
-    public Transform cameraArm;  // 카메라 암 Transform
-    public float moveSpeed = 5f;  // 일반 이동 속도
-    public float sprintSpeed = 10f;  // 달리기 속도
-    public float jumpPower = 7f;  // 점프 힘
-    public float applySpeed;  // 적용된 이동 속도
+    [SerializeField]       //유니티 내부에서 확인
+    public Transform characterBody; // 해당되는 개체를 드래그 후 지정하면 맞게 사용
+    public Camera playerCamera; // 카메라 오브젝트를 인스펙터에서 지정
+    public float applySpeed; // 적용되는 속도를 변수로 만듦
 
-    bool isRun;  // 달리는 상태
-    bool jump;  // 점프 입력 상태
-    bool isJump;  // 점프 중 상태
-    bool fDown;  // 상호작용 입력 상태
+    public PhotonView _pv;
+    Transform _tf;
 
-    float hAxis;  // 수평 입력 축
-    float vAxis;  // 수직 입력 축
+    bool isRun;       //달리기 여부 확인 변수
+    bool jump;       // 점프 여부 확인 변수
+    bool isJump;     // 땅에서만 점프 가능하게 하는 변수
 
-    bool isBorder;  // 경계 충돌 상태
 
-    Vector3 moveVec;  // 이동 벡터
-    Rigidbody rigid;  // 리지드바디 컴포넌트
-    Animator anim;  // 애니메이터 컴포넌트
+    bool fDown;       // f키를 눌렀을때 상호작용하는 변수
+
+    bool attack;       // 공격 여부 확인 변수
+    bool isattack;     // 공격 가능하게 하는 변수
+
+    float hAxis;     //키값 받기위한 변수
+    float vAxis;     //키값 받기위한 변수
+
+    float SprintSpeed = 53f;                          // 기본 달리는 속도
+    float MoveSpeed = 20f;                            // 기본 걷는 속도
+    float jumppower = 10;                              // 점프세기
+
+    bool isBorder;    //벽관통 막는 변수    
+
+    Vector3 moveVec;        //조건 설정을위한 백터
+    Vector3 dodgeVec;
+
+    Rigidbody rigid;       // 물리효과 구현
+    Animator anim;     //애니메이션 넣기 위한 함수
+
+    public float mouseSensitivity = 100f; // 마우스 민감도
+    private float xRotation = 0f; // 카메라 상하 회전 각도를 저장할 변수
+    private float yRotation = 0f; // 카메라 상하 회전 각도를 저장할 변수
 
     void Start()
     {
-        // 리지드바디 및 애니메이터 컴포넌트 초기화
+        _tf = GetComponent<Transform>();
+        if (_pv.IsMine)
+            Camera.main.GetComponent<CameraController>()._target = _tf.Find("Camera1").transform;
         rigid = GetComponent<Rigidbody>();
         anim = characterBody.GetComponent<Animator>();
-        applySpeed = moveSpeed;
-    }
+        applySpeed = 20f;
 
+    }
     void Update()
     {
-        // 매 프레임마다 입력, 에임, 이동, 점프 기능 호출
-        GetInput();
         Aim();
         Move();
         Jump();
-    }
 
-    void GetInput()
+
+    }
+    public void GetInput()
     {
-        // 플레이어 입력 처리
         hAxis = Input.GetAxisRaw("Horizontal");
-        vAxis = Input.GetAxisRaw("Vertical");
-        // fDown = Input.GetButtonDown("Interaction");  // 상호작용 입력 제거 또는 다른 버튼으로 대체
+        vAxis = Input.GetAxisRaw("Vertical'");
     }
 
-    void Aim()
+    public void Aim()
     {
-        // 마우스 움직임에 따른 카메라 조작
-        Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-        Vector3 camAngle = cameraArm.rotation.eulerAngles;
-        float x = camAngle.x - mouseDelta.y;
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-        if (x < 180f)
-        {
-            x = Mathf.Clamp(x, -1f, 70f);
-        }
-        else
-        {
-            x = Mathf.Clamp(x, 335f, 361f);
-        }
-        cameraArm.rotation = Quaternion.Euler(x, camAngle.y + mouseDelta.x, camAngle.z);
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f); // 상하 각도 제한
+
+        yRotation += mouseX;
+
+        playerCamera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f); // 카메라 상하 회전
+        transform.localRotation = Quaternion.Euler(0f, yRotation, 0f); // 캐릭터 좌우 회전
     }
 
-    void Move()
+    public void Move()       // 캐릭터 움직임 구현
     {
-        // 이동 벡터 계산 및 애니메이션 설정
         moveVec = new Vector3(hAxis, 0, vAxis).normalized;
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift))  // 좌측 shift를 누르면 값을 받아오는 함수이용
         {
             isRun = true;
-            applySpeed = sprintSpeed;
-            anim.SetBool("isRunning", true);
+            applySpeed = SprintSpeed;
         }
-        else
+        if (Input.GetKeyUp(KeyCode.LeftShift)) // 좌측 shift를 떼면 값을 받아오는 함수이용
         {
             isRun = false;
-            applySpeed = moveSpeed;
-            anim.SetBool("isRunning", false);
+            applySpeed = MoveSpeed;
         }
 
         Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         bool isMove = moveInput.magnitude != 0;
-        anim.SetBool("isWalking", isMove);
+        anim.SetBool("isRun", isRun);
+        anim.SetBool("isWalk", isMove);
 
+        // 벽 충돌 검사 로직
         if (isMove)
         {
-            Vector3 lookForward = new Vector3(cameraArm.forward.x, 0, cameraArm.forward.z).normalized;
-            Vector3 lookRight = new Vector3(cameraArm.right.x, 0, cameraArm.right.z).normalized;
+            Vector3 lookForward = new Vector3(playerCamera.transform.forward.x, 0, playerCamera.transform.forward.z).normalized;
+            Vector3 lookRight = new Vector3(playerCamera.transform.right.x, 0, playerCamera.transform.right.z).normalized;
             Vector3 moveDir = lookForward * moveInput.y + lookRight * moveInput.x;
 
-            characterBody.forward = lookForward;
-            if (!isBorder)
-                transform.position += moveDir * Time.deltaTime * applySpeed;
-            UnityEngine.Debug.DrawRay(transform.position, lookForward, Color.green);
-            isBorder = Physics.Raycast(transform.position, lookForward, 1, LayerMask.GetMask("Wall"));
+            characterBody.forward = lookForward;  // 캐릭터의 방향 설정
+
+            // 앞으로 이동할 때 벽이 있으면 속도를 0으로 설정
+            if (Physics.Raycast(transform.position, lookForward, 10, LayerMask.GetMask("Wall")))
+            {
+                applySpeed = 0;  // 벽이 있으면 속도를 0으로
+            }
+
+            // 이동 실행
+            transform.position += moveDir * Time.deltaTime * applySpeed;
+            Debug.DrawRay(transform.position, lookForward * 10, Color.green);  // 디버그 레이 표시
         }
+
     }
 
-    void Jump()
+    public void Jump()
     {
-        // 점프 입력 처리 및 애니메이션 설정
         jump = Input.GetButtonDown("Jump");
         if (jump && !isJump)
         {
-            rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
-            anim.SetBool("isJumping", true);
+
+            rigid.AddForce(Vector3.up * jumppower, ForceMode.Impulse);  //물리적인 힘을 가하는 함수 이용
+            anim.SetBool("isJump", true);
             anim.SetTrigger("doJump");
             isJump = true;
         }
@@ -120,11 +137,12 @@ public class player : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        // 착지 시 점프 상태 초기화
         if (collision.gameObject.tag == "ground")
         {
             isJump = false;
-            anim.SetBool("isJumping", false);
+            anim.SetBool("isJump", false);
         }
     }
+
+
 }
