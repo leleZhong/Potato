@@ -4,17 +4,18 @@ public class ButtonInteraction : MonoBehaviour
 {
     public GameObject interactionUI; // 상호작용 UI
     private GameObject currentInteractable; // 현재 상호작용 가능한 오브젝트
-    public Animator animator1;
-    public Animator animator2;
 
     void Start()
     {
         interactionUI.SetActive(false); // 처음에 UI를 비활성화
-        animator1 = GetComponent<Animator>();
-        animator2 = GetComponent<Animator>();
     }
 
-    
+    void Update()
+    {
+        
+            InteractWithObject(currentInteractable);
+        
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -34,12 +35,12 @@ public class ButtonInteraction : MonoBehaviour
         }
     }
 
-    public void InteractWithObject()
+    public void InteractWithObject(GameObject interactable)
     {
-        if (currentInteractable != null && currentInteractable.CompareTag("CorrectNumber"))
+        if (interactable.CompareTag("CorrectNumber"))
         {
             // CorrectNumber 태그를 가진 오브젝트와 상호작용했을 때 DoorOpen 애니메이션 재생
-            Animator doorAnimator = currentInteractable.GetComponent<Animator>();
+            Animator doorAnimator = interactable.GetComponent<Animator>();
             if (doorAnimator != null)
             {
                 doorAnimator.SetTrigger("DoorOpen");
