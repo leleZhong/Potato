@@ -13,7 +13,7 @@ public class Interaction : MonoBehaviour
 
     void MakeQuestion()
     {
-        List<int> InteractionNumbers = new List<int>() { 0, 1, 2, 3 }; // 생성 후보 번호들
+        List<int> InteractionNumbers = new List<int>() { 0, 1, 2, 3, 4 }; // 생성 후보 번호들
         int answerIndex = Random.Range(0, blockPrefabs.Length); // CorrectNumber 프리팹 인덱스 선택
         GameObject duplicatedBlock = blockPrefabs[answerIndex];
         duplicatedBlock.tag = "CorrectNumber";
