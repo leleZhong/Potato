@@ -75,3 +75,4 @@ crashlytics-build.properties
 .idea/
 *.sln.iml
 Library/ScriptAssemblies/Unity.Rider.Editor.dll
+Capstone/UserSettings/Layouts/default-2022.dwlt
