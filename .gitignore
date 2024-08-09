@@ -70,3 +70,9 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Ignore Rider related files
+.idea/
+*.sln.iml
+Library/ScriptAssemblies/Unity.Rider.Editor.dll
+Capstone/UserSettings/Layouts/default-2022.dwlt
