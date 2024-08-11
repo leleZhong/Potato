@@ -8,7 +8,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public MainMenu _mainMenu;
 
     const string ReadyProperty = "IsReady";
-    bool _isConnectedToMaster = false;
 
     void Awake()
     {
@@ -22,28 +21,22 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.ConnectUsingSettings();
         }
-        transform.SetParent(null);
-        DontDestroyOnLoad(gameObject); // PhotonManager 객체�? ?��괴하�? ?��?���? ?��?��
+        DontDestroyOnLoad(gameObject); // PhotonManager 객체를 파괴하지 않도록 설정
     }
 
     public override void OnConnectedToMaster()
     {
         Debug.Log("Connected to Master");
-        _isConnectedToMaster = true;
     }
 
     public void JoinRoom()
     {
-        if (_isConnectedToMaster)
-            PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions { MaxPlayers = 2 }, null);
-        else
-            Debug.LogError("마스터 서버에 연결되지 않았습니다.");
+        PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions { MaxPlayers = 2 }, null);
     }
 
     public override void OnJoinedRoom()
     {
         Debug.Log("Joined Room");
-        GameManager.Instance._isConnect = true;
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -82,13 +75,15 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
         Debug.Log("All players ready. Starting game.");
 
-
-        GameManager.Instance.ConnectAndCreatePlayer();
-
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance._isConnect = true;
+            GameManager.Instance.ConnectAndCreatePlayer();
+        }
 
         if (_mainMenu != null)
-        {
-            _mainMenu.OnLoadingFinish();
-        }
+            {
+                _mainMenu.OnLoadingFinish();
+            }
     }
 }

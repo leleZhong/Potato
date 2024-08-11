@@ -12,7 +12,6 @@ public class SoundManager : MonoBehaviour
 
     void Awake()
     {
-        transform.SetParent(null);
         DontDestroyOnLoad(gameObject); // SoundManager 객체를 파괴하지 않도록 설정
     }
 
