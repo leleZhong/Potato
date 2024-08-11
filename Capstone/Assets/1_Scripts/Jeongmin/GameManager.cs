@@ -50,10 +50,14 @@ public class GameManager : MonoBehaviour
         Debug.Log("Waiting for connection...");
         yield return new WaitUntil(() => _isConnect);
 
-        _spawnPoints = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
+        _spawnPoints[0] = GameObject.Find("JM_P1").transform.Find("SpawnPoint1").transform;
+        _spawnPoints[1] = GameObject.Find("JM_P2").transform.Find("SpawnPoint2").transform;
 
-        Vector3 pos = _spawnPoints[PhotonNetwork.CurrentRoom.PlayerCount].position;
-        Quaternion rot = _spawnPoints[PhotonNetwork.CurrentRoom.PlayerCount].rotation;
+        int playerIndex = PhotonNetwork.LocalPlayer.ActorNumber - 1;
+        playerIndex = Mathf.Clamp(playerIndex, 0, _spawnPoints.Length - 1);
+
+        Vector3 pos = _spawnPoints[playerIndex].position;
+        Quaternion rot = _spawnPoints[playerIndex].rotation;
 
         GameObject playerTemp = PhotonNetwork.Instantiate("character1", pos, rot, 0);
     }
@@ -84,7 +88,7 @@ public class GameManager : MonoBehaviour
         if (talkData == null)
         {
             _isAction = false;
-            _talkIndex = 0; // ëŒ€í™”ê°€ ëë‚  ë•Œ 0ìœ¼ë¡œ ì´ˆê¸°í™”
+            _talkIndex = 0; // ????™”ê°? ??‚  ?•Œ 0?œ¼ë¡? ì´ˆê¸°?™”
             _panel.SetActive(_isAction);
             return;
         }

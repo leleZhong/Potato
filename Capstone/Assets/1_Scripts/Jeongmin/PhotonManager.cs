@@ -60,7 +60,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         };
         PhotonNetwork.LocalPlayer.SetCustomProperties(props);
         Debug.Log("SetPlayerReady");
-        CheckAllPlayersReady();
     }
     public void CheckAllPlayersReady()
     {
@@ -74,9 +73,10 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
         foreach (Player player in PhotonNetwork.PlayerList)
         {
-            if (player.CustomProperties.TryGetValue(ReadyProperty, out object isReady) && (bool)isReady)
+            if (!player.CustomProperties.TryGetValue(ReadyProperty, out object isReady) || !(bool)isReady)
             {
-                continue;
+                Debug.Log("Not all players are ready.");
+                return;
             }
         }
 

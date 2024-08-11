@@ -8,6 +8,8 @@ public class character : MonoBehaviour
     [SerializeField]       //유니티 내부에서 확인
     public Transform characterBody; // 해당되는 개체를 드래그 후 지정하면 맞게 사용
     public Camera playerCamera; // 카메라 오브젝트를 인스펙터에서 지정
+    public AudioListener audioListener;
+
     public float applySpeed; // 적용되는 속도를 변수로 만듦
 
     public PhotonView _pv;
@@ -46,7 +48,13 @@ public class character : MonoBehaviour
     {
         _tf = GetComponent<Transform>();
         if (_pv.IsMine)
+        {
             Camera.main.GetComponent<CameraController>()._target = _tf.Find("Camera1").transform;
+            audioListener.enabled = true;
+        }
+        else
+            audioListener.enabled = false;
+        
         rigid = GetComponent<Rigidbody>();
         anim = characterBody.GetComponent<Animator>();
         applySpeed = 20f;

@@ -48,7 +48,9 @@ public class MainMenu : MonoBehaviour
         _photonManager._mainMenu = this; // PhotonManager에 UIManager를 연결
 
         _photonManager.JoinRoom();
-    
+        _photonManager.SetPlayerReady();
+
+        StartCoroutine(CheckAllPlayersReadyCoroutine());
     }   
 
     IEnumerator ShowLoadingText()
@@ -63,6 +65,15 @@ public class MainMenu : MonoBehaviour
                 index = (index + 1) % message.Length; // 인덱스 순환
                 yield return new WaitForSeconds(0.3f); // 딜레이
             }
+        }
+    }
+
+    IEnumerator CheckAllPlayersReadyCoroutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.3f); // 0.3초마다 확인
+            _photonManager.CheckAllPlayersReady();
         }
     }
 

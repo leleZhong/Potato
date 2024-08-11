@@ -1289,7 +1289,6 @@ GameObject:
   m_Component:
   - component: {fileID: 992225598}
   - component: {fileID: 992225597}
-  - component: {fileID: 992225596}
   - component: {fileID: 992225599}
   m_Layer: 0
   m_Name: Main Camera
@@ -1298,14 +1297,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &992225596
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 992225595}
-  m_Enabled: 1
 --- !u!20 &992225597
 Camera:
   m_ObjectHideFlags: 0
@@ -1372,21 +1363,14 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &992225599
-MonoBehaviour:
+--- !u!81 &992225599
+AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992225595}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3c66c3b2f5d30645bb1684ffe51e561, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _target: {fileID: 0}
-  _xAxis: 0
-  _yAxis: 0
 --- !u!1 &1058938338
 GameObject:
   m_ObjectHideFlags: 0
@@ -2299,7 +2283,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isConnect: 0
-  _spawnPoints: []
+  _spawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
   _isAction: 0
   talkManager: {fileID: 0}
   _talkText: {fileID: 0}
