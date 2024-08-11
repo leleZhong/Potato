@@ -1502,7 +1502,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Dungeon Puzzle
+  m_Text: Puzzle Escape
 --- !u!222 &1151295623
 CanvasRenderer:
   m_ObjectHideFlags: 0

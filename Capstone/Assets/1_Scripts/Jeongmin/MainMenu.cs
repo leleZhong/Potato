@@ -70,7 +70,7 @@ public class MainMenu : MonoBehaviour
     {
         Debug.Log("OnLoadingFinish");
         _loading.gameObject.SetActive(false);
-        SceneManager.LoadScene("Stage1_JM");
+        SceneManager.LoadScene(2);
     }
 
     public void OnClickExit()
