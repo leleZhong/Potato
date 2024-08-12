@@ -14,6 +14,14 @@ TagManager:
   - Block
   - Interaction
   - CorrectNumber
+  - Bullet
+  - portal
+  - blue
+  - yellow
+  - green
+  - Ground
+  - red
+  - letter
   layers:
   - Default
   - TransparentFX

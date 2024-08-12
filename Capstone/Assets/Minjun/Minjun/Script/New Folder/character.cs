@@ -27,8 +27,8 @@ public class character : MonoBehaviour
     float hAxis;     //키값 받기위한 변수
     float vAxis;     //키값 받기위한 변수
 
-    float SprintSpeed = 53f;                          // 기본 달리는 속도
-    float MoveSpeed = 20f;                            // 기본 걷는 속도
+    float SprintSpeed = 10.6f;                          // 기본 달리는 속도
+    float MoveSpeed = 4.0f;                            // 기본 걷는 속도
     float jumppower = 10;                              // 점프세기
 
     bool isBorder;    //벽관통 막는 변수    
@@ -46,16 +46,55 @@ public class character : MonoBehaviour
     void Start()
     {
         _tf = GetComponent<Transform>();
-        
-        if (_pv.IsMine)
+
+        if (Camera.main == null)
         {
-            Camera.main.GetComponent<CameraController>()._target = _tf.Find("Camera1").transform;
+            Debug.LogError("Main Camera is not found!");
+        }
+        else
+        {
+            var cameraController = Camera.main.GetComponent<CameraController>();
+            if (cameraController != null)
+            {
+                Transform cameraTransform = _tf.Find("Camera1");
+                if (cameraTransform != null)
+                {
+                    cameraController._target = cameraTransform;
+                }
+                else
+                {
+                    Debug.LogError("Camera1 object not found as a child of this transform.");
+                }
+            }
+            else
+            {
+                Debug.LogError("CameraController component not found on Main Camera!");
+            }
+        }
+
+        if (playerCamera != null)
+        {
             playerCamera.gameObject.AddComponent<AudioListener>();
         }
-        
+        else
+        {
+            Debug.LogError("Player camera is not assigned in the inspector.");
+        }
+
         rigid = GetComponent<Rigidbody>();
+        if (rigid == null)
+        {
+            Debug.LogError("Rigidbody component not found!");
+        }
+
         anim = characterBody.GetComponent<Animator>();
-        applySpeed = 20f;
+        if (anim == null)
+        {
+            Debug.LogError("Animator component not found on characterBody!");
+        }
+
+        applySpeed = 2.0f;
+
 
     }
     void Update()
@@ -143,7 +182,7 @@ public class character : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "ground")
+        if (collision.gameObject.tag == "Ground")
         {
             isJump = false;
             anim.SetBool("isJump", false);
