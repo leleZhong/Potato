@@ -25,7 +25,18 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else if (Instance != this)
+            Destroy(this.gameObject);
+    }
+
+    void Initialize()
+    {
+        ConnectAndCreatePlayer();
     }
 
     public void ConnectAndCreatePlayer()
@@ -44,7 +55,7 @@ public class GameManager : MonoBehaviour
         Vector3 pos = _spawnPoints[PhotonNetwork.CurrentRoom.PlayerCount].position;
         Quaternion rot = _spawnPoints[PhotonNetwork.CurrentRoom.PlayerCount].rotation;
 
-        GameObject playerTemp = PhotonNetwork.Instantiate("Player", pos, rot, 0);
+        GameObject playerTemp = PhotonNetwork.Instantiate("character1", pos, rot, 0);
     }
 
     public void Action(GameObject scanObj)
