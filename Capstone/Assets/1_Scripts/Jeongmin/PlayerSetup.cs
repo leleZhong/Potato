@@ -6,6 +6,7 @@ using Photon.Pun;
 public class PlayerSetup : MonoBehaviour
 {
     public PhotonView _pv;
+    public Camera _camera;
     AudioListener _al;
 
     void Start()
@@ -29,7 +30,7 @@ public class PlayerSetup : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out RaycastHit hit))
             {

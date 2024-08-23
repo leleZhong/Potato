@@ -17733,6 +17733,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!20 &907642857 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2266883249175283669, guid: 6c6a74282553fb64189fa0873a2c0f48, type: 3}
+  m_PrefabInstance: {fileID: 7703063003831798253}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &912498487
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52100,6 +52105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pv: {fileID: 9041889915946107602}
+  _camera: {fileID: 907642857}
 --- !u!33 &9041986971097383279
 MeshFilter:
   m_ObjectHideFlags: 0
