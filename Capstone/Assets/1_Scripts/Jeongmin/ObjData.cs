@@ -12,5 +12,4 @@ public class ObjData : MonoBehaviour
 
     public GameObjectTypes _type;
     public int _id;
-    public bool _isBtn;
 }

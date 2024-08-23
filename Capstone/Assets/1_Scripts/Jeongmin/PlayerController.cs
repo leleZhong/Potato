@@ -6,25 +6,25 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    public Rigidbody _rd;
+    // public Rigidbody _rd;
     public PhotonView _pv;
-    public Animator _anim; 
+    // public Animator _anim; 
 
     public float _speed;
 
-    IEnumerator Start()
-    {
-        yield return new WaitForSeconds(0.5f);
+    // IEnumerator Start()
+    // {
+    //     yield return new WaitForSeconds(0.5f);
 
-        if (_pv.IsMine)
-        {
-            Camera.main.GetComponent<CameraController>()._target = transform.Find("CamPivot").transform;
-        }
-        else
-        {
-            _rd.isKinematic = true;
-        }
-    }
+    //     if (_pv.IsMine)
+    //     {
+    //         Camera.main.GetComponent<CameraController>()._target = transform.Find("CamPivot").transform;
+    //     }
+    //     else
+    //     {
+    //         _rd.isKinematic = true;
+    //     }
+    // }
 
     void Update()
     {
@@ -45,24 +45,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
-    {
-        float h = GameManager.Instance._isAction ? 0 : Input.GetAxisRaw("Horizontal");
-        float v = GameManager.Instance._isAction ? 0 : Input.GetAxisRaw("Vertical");
-        Vector3 nextPos = new Vector3(h, 0, v) * _speed * Time.deltaTime;
-        Vector3 currentPos = transform.position + nextPos;
+    // void FixedUpdate()
+    // {
+    //     float h = GameManager.Instance._isAction ? 0 : Input.GetAxisRaw("Horizontal");
+    //     float v = GameManager.Instance._isAction ? 0 : Input.GetAxisRaw("Vertical");
+    //     Vector3 nextPos = new Vector3(h, 0, v) * _speed * Time.deltaTime;
+    //     Vector3 currentPos = transform.position + nextPos;
 
-        transform.position = currentPos;
+    //     transform.position = currentPos;
 
-        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
-        {
-            _anim.SetBool("Input", true);
-        }
-        else
-        {
-            _anim.SetBool("Input", false);
-        }
-    }
+    //     if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+    //     {
+    //         _anim.SetBool("Input", true);
+    //     }
+    //     else
+    //     {
+    //         _anim.SetBool("Input", false);
+    //     }
+    // }
 
     void OnTriggerEnter(Collider other)
     {
