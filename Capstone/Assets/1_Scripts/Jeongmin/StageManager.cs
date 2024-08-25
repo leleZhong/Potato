@@ -82,7 +82,7 @@ public class StageManager : MonoBehaviour
         }
     }
 
-    public void ChangeColor(GameObject[] objects, int[] indices, int step, Texture[] _textures)
+    void ChangeColor(GameObject[] objects, int[] indices, int step, Texture[] _textures)
     {
         foreach (int index in indices)
         {
@@ -92,10 +92,29 @@ public class StageManager : MonoBehaviour
         }
     }
 
+    void ResetColor(GameObject[] objects)
+    {
+        Texture red = _texturesRBGY[0];
+
+        foreach (GameObject obj in objects)
+        {
+            Renderer renderer = obj.GetComponent<Renderer>();
+            renderer.material.mainTexture = red;
+        }
+    }
+
     public void ButtonClick(int id)
     {
         switch (id)
         {
+            // 리셋 버튼
+            case 2001:
+                ResetColor(_objectsP1);
+                break;
+            case 2002:
+                ResetColor(_objectsP2);
+                break;
+                
             // P1 - 플레이어 1의 패턴
             // 정답 : 3-2-1-2-1(파노파초빨)
             case 3001:
@@ -110,7 +129,7 @@ public class StageManager : MonoBehaviour
             
 
             // P2 - 플레이어 2의 패턴
-            // 정답 : 1-2-3-1-3-3-1(초노빨노파)
+            // 정답 : 1-2-3-1-3(초파노파파)
             case 3004:
                 ChangeColor(_objectsP2, new int[] { 0, 2 }, 1, _texturesRBGY); // 원 1과 원 3
                 break;
