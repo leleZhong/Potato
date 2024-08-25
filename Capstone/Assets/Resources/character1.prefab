@@ -372,6 +372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pv: {fileID: 4063669527115757880}
+  _camera: {fileID: 2632918979963135356}
 --- !u!114 &3196268061255127750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -393,6 +394,11 @@ MonoBehaviour:
 --- !u!4 &1132513275655511836 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 362775853377199268, guid: 68750b288afd7794aa235d62b221f350, type: 3}
+  m_PrefabInstance: {fileID: 774522815284986808}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &2632918979963135356 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 3329754112893478596, guid: 68750b288afd7794aa235d62b221f350, type: 3}
   m_PrefabInstance: {fileID: 774522815284986808}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &4063669527115757880 stripped
