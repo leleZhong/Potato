@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Capstone/Assets/0_Scenes/Cinematic.unity.meta
+guid: ebfadf8ab0df67f4091ff1a44429361a
+========
 guid: 7534806977e3a5b4aa4fa5ba4d1b2c3e
 folderAsset: yes
+>>>>>>>> master:Capstone/Assets/UI Toolkit.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
