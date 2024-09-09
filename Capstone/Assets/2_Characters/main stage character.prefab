@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 6637417111689835734}
   - component: {fileID: 303409163667347795}
   - component: {fileID: 7486781492555027895}
+  - component: {fileID: 4345824590928149904}
+  - component: {fileID: 4381697553934884292}
   m_Layer: 0
   m_Name: main stage character
   m_TagString: Player
@@ -140,6 +142,38 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &4345824590928149904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4509163929378456635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76937c8611288df49a50d21a0be9c073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionForce: 1000
+  explosionRadius: 5
+  upwardsModifier: 1
+  explosionEffectPrefab: {fileID: 6143467867895953418, guid: be01741081bb2c944aad51a527b3e120, type: 3}
+  effectScaleMultiplier: 5
+  effectRotation: {x: 90, y: 0, z: 0}
+--- !u!114 &4381697553934884292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4509163929378456635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b61a7c8ebbbd324b84a675027096f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pv: {fileID: 7486781492555027895}
+  _camera: {fileID: 2266883249175283669}
 --- !u!1 &7332014927420761680
 GameObject:
   m_ObjectHideFlags: 0
