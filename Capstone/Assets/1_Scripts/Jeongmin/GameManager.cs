@@ -5,6 +5,8 @@ using Photon.Pun;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -32,8 +34,44 @@ public class GameManager : MonoBehaviour
         }
         else if (Instance != this)
             Destroy(this.gameObject);
+
+        EventSystem[] eventSystems = FindObjectsOfType<EventSystem>();
+        if (eventSystems.Length > 1)
+        {
+            for (int i = 1; i < eventSystems.Length; i++)  // ? ?? ??? ???? ??? ??? ??
+            {
+                Destroy(eventSystems[i].gameObject);
+            }
+        }
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    // ?? ??? ? StageManager? ?? ?? ???
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // StageManager? null? ?? ??? ??
+        if (stageManager == null)
+        {
+            stageManager = FindObjectOfType<StageManager>();
+
+            if (stageManager != null)
+            {
+                Debug.Log("StageManager? ???????.");
+            }
+            else
+            {
+                Debug.LogError("StageManager? ?? ?????.");
+            }
+        }
+    }
+
+    // ????? SceneManager? ???? ???? ???
+    void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+    
     void Initialize()
     {
         ConnectAndCreatePlayer();
