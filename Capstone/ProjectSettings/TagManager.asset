@@ -22,6 +22,7 @@ TagManager:
   - Ground
   - red
   - letter
+  - Lantern
   layers:
   - Default
   - TransparentFX

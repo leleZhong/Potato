@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Board : MonoBehaviour
 {
-    [SerializeField]
+	[SerializeField]
 	private	GameObject	tilePrefab;								// 숫자 타일 프리팹
 	[SerializeField]
 	private	Transform	tilesParent;							// 타일이 배치되는 "Board" 오브젝트의 Transform
@@ -94,7 +94,6 @@ public class Board : MonoBehaviour
 	{
 		List<Tile> tiles = tileList.FindAll(x => x.IsCorrected == true);
 
-		Debug.Log("Correct Count : "+tiles.Count);
 		if ( tiles.Count == puzzleSize.x * puzzleSize.y - 1 )
 		{
 			Debug.Log("GameClear");

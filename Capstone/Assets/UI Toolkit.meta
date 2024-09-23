@@ -1,6 +1,14 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Capstone/Assets/0_Scenes/Cinematic.unity.meta
+<<<<<<< Updated upstream
+guid: ebfadf8ab0df67f4091ff1a44429361a
+=======
+guid: f20dc63dd9294ed44ab13137a1c741be
+>>>>>>> Stashed changes
+========
 guid: 7534806977e3a5b4aa4fa5ba4d1b2c3e
 folderAsset: yes
+>>>>>>>> master:Capstone/Assets/UI Toolkit.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

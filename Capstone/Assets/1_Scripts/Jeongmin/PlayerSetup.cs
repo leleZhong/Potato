@@ -18,22 +18,17 @@ public class PlayerSetup : MonoBehaviour
             // 로컬 플레이어의 AudioListener 활성화
             if (_al != null)
                 _al.enabled = true;
-            
-            if (_camera != null)
-                _camera.enabled = true;
         }
         else
         {
             if (_al != null)
                 _al.enabled = false;
-            if (_camera != null)
-                _camera.enabled = false;
         }
     }
 
     void Update()
     {
-        if (_pv.IsMine && Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
 
