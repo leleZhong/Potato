@@ -95,7 +95,7 @@ public class TutorialCharacter : MonoBehaviour
 
         applySpeed = 2.0f;
 
-        StartCoroutine(DisableInputForSeconds(5)); // 5초간 입력 차단
+        StartCoroutine(DisableInputForSeconds(17)); // 17초간 입력 차단
     }
 
     IEnumerator DisableInputForSeconds(float seconds)
