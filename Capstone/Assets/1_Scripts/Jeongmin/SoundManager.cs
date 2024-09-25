@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
-    public List<AudioSource> _BGMList;
-    // public List<AudioSource> _effectList;
+    public List<AudioSource> _BGMList; // BGM 오디오 소스 목록
+    public List<AudioClip> _effectClips; // 효과음 오디오 클립 목록
+    private AudioSource _effectSource; // 효과음을 재생하는 오디오 소스
 
     public Settings _settings;
 
@@ -14,6 +15,10 @@ public class SoundManager : MonoBehaviour
     {
         transform.SetParent(null);
         DontDestroyOnLoad(gameObject); // SoundManager 객체를 파괴하지 않도록 설정
+
+        // 효과음용 AudioSource 생성
+        _effectSource = gameObject.AddComponent<AudioSource>();
+        _effectSource.loop = false;
     }
 
     void Start()
@@ -24,11 +29,9 @@ public class SoundManager : MonoBehaviour
         if (_settings != null)
         {
             _settings._soundManager = this;
-            
+
             _BGMList[0].playOnAwake = true; // BGM 추가
             _BGMList[0].loop = true;
-            // _effectList[0].playOnAwake = false; // Effect 추가
-            // _effectList[0].loop = false;
             InitializeSlider();
             LoadSettings();
         }
@@ -44,11 +47,11 @@ public class SoundManager : MonoBehaviour
         {
             if (_settings._BGMSlider != null)
             {
-                _settings._BGMSlider.value = PlayerPrefs.GetFloat("BGMVolume");
+                _settings._BGMSlider.value = PlayerPrefs.GetFloat("BGMVolume", 1f);
             }
             if (_settings._effectSlider != null)
             {
-                _settings._effectSlider.value = PlayerPrefs.GetFloat("EffectVolume");
+                _settings._effectSlider.value = PlayerPrefs.GetFloat("EffectVolume", 1f);
             }
         }
     }
@@ -67,11 +70,7 @@ public class SoundManager : MonoBehaviour
 
     public void OnEffectVolumeChanged()
     {
-        // foreach (AudioSource audioSource in _effectList)
-        // {
-        //     audioSource.volume = _settings._effectSlider.value;
-        // }
-
+        _effectSource.volume = _settings._effectSlider.value;
         SaveSettings();
     }
 
@@ -91,6 +90,20 @@ public class SoundManager : MonoBehaviour
         if (PlayerPrefs.HasKey("EffectVolume"))
         {
             _settings._effectSlider.value = PlayerPrefs.GetFloat("EffectVolume");
+        }
+    }
+
+    // 캐릭터 효과음을 재생하기 위한 함수 추가
+    public void PlayEffectSound(string clipName)
+    {
+        AudioClip clip = _effectClips.Find(c => c.name == clipName);
+        if (clip != null)
+        {
+            _effectSource.PlayOneShot(clip, _settings._effectSlider.value);
+        }
+        else
+        {
+            Debug.LogWarning("Effect clip not found: " + clipName);
         }
     }
 }
