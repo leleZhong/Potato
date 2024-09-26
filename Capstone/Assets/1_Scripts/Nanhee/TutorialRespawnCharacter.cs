@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 
-public class TutorialCharacter : MonoBehaviour
+public class TutorialRespawnCharacter : MonoBehaviour
 {
     [SerializeField]       //유니티 내부에서 확인
     public Transform characterBody; // 해당되는 개체를 드래그 후 지정하면 맞게 사용
@@ -17,7 +17,7 @@ public class TutorialCharacter : MonoBehaviour
     bool isRun;       //달리기 여부 확인 변수
     bool jump;       // 점프 여부 확인 변수
     bool isJump;     // 땅에서만 점프 가능하게 하는 변수
-    bool isInputEnabled = false; // 입력 가능 여부 제어 변수
+    
 
     bool fDown;       // f키를 눌렀을때 상호작용하는 변수
 
@@ -68,7 +68,7 @@ public class TutorialCharacter : MonoBehaviour
             }
             else
             {
-                
+
             }
         }
 
@@ -87,42 +87,46 @@ public class TutorialCharacter : MonoBehaviour
             Debug.LogError("Rigidbody component not found!");
         }
 
-        
+        anim = characterBody.GetComponent<Animator>();
+        if (anim == null)
+        {
+            Debug.LogError("Animator component not found on characterBody!");
+        }
 
         applySpeed = 2.0f;
 
-        StartCoroutine(DisableInputForSeconds(19)); // 17초간 입력 차단
-
         
+        //StartCoroutine(DisableInputForSeconds(19)); // 17초간 입력 차단
+
+
     }
 
-    IEnumerator DisableInputForSeconds(float seconds)
-    {
-        isInputEnabled = false;
-        yield return new WaitForSeconds(seconds);
-        isInputEnabled = true; // 5초 후 입력 활성화
-    }
+    //IEnumerator DisableInputForSeconds(float seconds)
+    //{
+    //    isInputEnabled = false;
+    //    yield return new WaitForSeconds(seconds);
+    //    isInputEnabled = true; // 5초 후 입력 활성화
+    //}
 
     void Update()
     {
-        if (isInputEnabled)
-        {
+        
             Aim();
             Move();
             Jump();
-        }
+       
     }
 
-    public void SetCharacter(Transform newCharacterBody)
-    {
-        characterBody = newCharacterBody;
-        anim = characterBody.GetComponent<Animator>();
+    //public void SetCharacter(Transform CharacterBody)
+    //{
+    //    characterBody = CharacterBody;
+    //    anim = characterBody.GetComponent<Animator>();
 
-        if (anim == null)
-        {
-            Debug.LogError("Animator component not found on the characterBody!");
-        }
-    }
+    //    if (anim == null)
+    //    {
+    //        Debug.LogError("Animator component not found on the characterBody!");
+    //    }
+    //}
 
 
     public void GetInput()
@@ -147,44 +151,42 @@ public class TutorialCharacter : MonoBehaviour
 
     public void Move()       // 캐릭터 움직임 구현
     {
+        hAxis = Input.GetAxisRaw("Horizontal");
+        vAxis = Input.GetAxisRaw("Vertical");
         moveVec = new Vector3(hAxis, 0, vAxis).normalized;
 
-        if (Input.GetKey(KeyCode.LeftShift))  // 좌측 shift를 누르면 값을 받아오는 함수이용
+        bool isMoving = moveVec.magnitude > 0;
+        bool isShiftPressed = Input.GetKey(KeyCode.LeftShift);
+
+        // 뛰기
+        if (isShiftPressed && isMoving && !isJump) // 점프 중이 아닐 때만 실행
         {
             isRun = true;
             applySpeed = SprintSpeed;
+           
         }
-        if (Input.GetKeyUp(KeyCode.LeftShift)) // 좌측 shift를 떼면 값을 받아오는 함수이용
+        // 걷기
+        else if (!isShiftPressed && isMoving && !isJump) // 점프 중이 아닐 때만 실행
         {
             isRun = false;
             applySpeed = MoveSpeed;
+           
         }
 
-        Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        bool isMove = moveInput.magnitude != 0;
-        anim.SetBool("isRun", isRun);
-        anim.SetBool("isWalk", isMove);
+     
 
-        // 벽 충돌 검사 로직
-        if (isMove)
+        anim.SetBool("isRun", isRun);
+        anim.SetBool("isWalk", isMoving);
+
+        if (isMoving)
         {
             Vector3 lookForward = new Vector3(playerCamera.transform.forward.x, 0, playerCamera.transform.forward.z).normalized;
             Vector3 lookRight = new Vector3(playerCamera.transform.right.x, 0, playerCamera.transform.right.z).normalized;
-            Vector3 moveDir = lookForward * moveInput.y + lookRight * moveInput.x;
+            Vector3 moveDir = lookForward * moveVec.z + lookRight * moveVec.x;
 
             characterBody.forward = lookForward;  // 캐릭터의 방향 설정
-
-            // 앞으로 이동할 때 벽이 있으면 속도를 0으로 설정
-            if (Physics.Raycast(transform.position, lookForward, 10, LayerMask.GetMask("Wall")))
-            {
-                applySpeed = 0;  // 벽이 있으면 속도를 0으로
-            }
-
-            // 이동 실행
             transform.position += moveDir * Time.deltaTime * applySpeed;
-            Debug.DrawRay(transform.position, lookForward * 10, Color.green);  // 디버그 레이 표시
         }
-
     }
 
     public void Jump()
@@ -200,12 +202,12 @@ public class TutorialCharacter : MonoBehaviour
         }
     }
 
-    //void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.tag == "Ground")
-    //    {
-    //        isJump = false;
-    //        anim.SetBool("isJump", false);
-    //    }
-    //}
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            isJump = false;
+            anim.SetBool("isJump", false);
+        }
+    }
 }

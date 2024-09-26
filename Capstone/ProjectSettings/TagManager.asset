@@ -23,6 +23,8 @@ TagManager:
   - red
   - letter
   - Lantern
+  - Trigger2
+  - Trigger1
   layers:
   - Default
   - TransparentFX
@@ -30,7 +32,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - PostProcessing
   - 
   - 
   - 
