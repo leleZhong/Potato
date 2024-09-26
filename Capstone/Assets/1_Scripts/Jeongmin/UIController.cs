@@ -1,29 +1,32 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-	[SerializeField]
-	private	GameObject		resultPanel;
-	[SerializeField]
-	private	TextMeshProUGUI	textPlaytime;
-	[SerializeField]
-	private	TextMeshProUGUI	textMoveCount;
-	[SerializeField]
-	private	Board			board;
+	public GameObject _resultPanel;
+	public Text[] _nums;
+	public string[] _answer;
 
 	public void OnResultPanel()
 	{
-		resultPanel.SetActive(true);
+		int i = 0;
 
-		textPlaytime.text = $"PLAY TIME : {board.Playtime/60:D2}:{board.Playtime%60:D2}";
-		textMoveCount.text = "MOVE COUNT : "+board.MoveCount;
+		foreach (Text num in _nums)
+		{
+			if (num != null && _answer != null)
+			{
+				num.text = _answer[i];
+			}
+			i++;
+		}
 	}
 
-	public void OnClickRestart()
+	public void OnClickExit()
 	{
-		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		_resultPanel.SetActive(false);
 	}
 }
 
