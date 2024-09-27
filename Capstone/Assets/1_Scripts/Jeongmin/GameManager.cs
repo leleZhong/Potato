@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
         Vector3 pos = _spawnPoints[playerIndex].position;
         Quaternion rot = _spawnPoints[playerIndex].rotation;
 
-        GameObject playerTemp = PhotonNetwork.Instantiate("character1", pos, rot, 0);
+        GameObject playerTemp = PhotonNetwork.Instantiate("Player", pos, rot, 0);
     }
 
     public void Action(GameObject scanObj)

@@ -6,9 +6,14 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-	public GameObject _resultPanel;
+	public GameObject _gamePanel;
 	public Text[] _nums;
 	public string[] _answer;
+
+	void Awake()
+	{
+		_gamePanel.SetActive(false);
+	}
 
 	public void OnResultPanel()
 	{
@@ -26,7 +31,7 @@ public class UIController : MonoBehaviour
 
 	public void OnClickExit()
 	{
-		_resultPanel.SetActive(false);
+		_gamePanel.SetActive(false);
 	}
 }
 
