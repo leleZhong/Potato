@@ -12,11 +12,9 @@ public class Board : MonoBehaviour
 	private	List<Tile>	tileList;								// 생성한 타일 정보 저장
 
 	private	Vector2Int	puzzleSize = new Vector2Int(4, 4);		// 4x4 퍼즐
-	private	float		neighborTileDistance = 102;				// 인접한 타일 사이의 거리. 별도로 계산할 수도 있다.
+	private	float		neighborTileDistance = 102;				// 인접한 타일 사이의 거리
 
 	public	Vector3		EmptyTilePosition { set; get; }			// 빈 타일의 위치
-	public	int			Playtime { private set; get; } = 0;		// 게임 플레이 시간
-	public	int			MoveCount { private set; get; } = 0;	// 이동 횟수
 
 	private IEnumerator Start()
 	{
@@ -33,8 +31,6 @@ public class Board : MonoBehaviour
 		tileList.ForEach(x => x.SetCorrectPosition());
 
 		StartCoroutine("OnSuffle");
-		// 게임시작과 동시에 플레이시간 초 단위 연산
-		StartCoroutine("CalculatePlaytime");
 	}
 
 	private void SpawnTiles()
@@ -84,9 +80,6 @@ public class Board : MonoBehaviour
 			EmptyTilePosition = tile.GetComponent<RectTransform>().localPosition;
 
 			tile.OnMoveTo(goalPosition);
-
-			// 타일을 이동할 때마다 이동 횟수 증가
-			MoveCount ++;
 		}
 	}
 
@@ -102,16 +95,6 @@ public class Board : MonoBehaviour
 			// Board 오브젝트에 컴포넌트로 설정하기 때문에
 			// 그리고 한번만 호출하기 때문에 변수를 만들지 않고 바로 호출..
 			GetComponent<UIController>().OnResultPanel();
-		}
-	}
-
-	private IEnumerator CalculatePlaytime()
-	{
-		while ( true )
-		{
-			Playtime ++;
-
-			yield return new WaitForSeconds(1);
 		}
 	}
 }
