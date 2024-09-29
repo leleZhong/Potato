@@ -20,19 +20,26 @@ public class ColorCounter : MonoBehaviour
 
     [SerializeField] private ColorChanger colorChanger; // ColorChanger 오브젝트를 직접 참조
 
+
+    GameObject mjUI;
+
+    void Awake()
+    {
+        mjUI = GameObject.Find("MJ_UI");
+    }
+
     void Start()
     {
-        pickupTextUI.text = "";
-        pickupTextUI.gameObject.SetActive(false);
+        // ColorChanger 할당
+        colorChanger = FindAnyObjectByType<ColorChanger>();
+        
+        // TextMeshPro할당
+        pickupTextUI = mjUI.transform.Find("pickupTextUI").GetComponent<TextMeshProUGUI>();
+        interactTextUI = mjUI.transform.Find("interactTextUI").GetComponent<TextMeshProUGUI>();
+        resetTextUI = mjUI.transform.Find("resetTextUI").GetComponent<TextMeshProUGUI>();
+        countDisplayUI = mjUI.transform.Find("countDisplayUI").GetComponent<TextMeshProUGUI>();
 
-        interactTextUI.text = "";
-        interactTextUI.gameObject.SetActive(false);
-
-        resetTextUI.text = "";
-        resetTextUI.gameObject.SetActive(false);
-
-        countDisplayUI.text = GetCountDisplayText();
-        countDisplayUI.gameObject.SetActive(false); // 초기에는 비활성화
+        mjUI.SetActive(false);
     }
 
     void Update()
