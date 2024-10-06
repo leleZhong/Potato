@@ -6,23 +6,28 @@ using Photon.Pun;
 public class PlayerSetup : MonoBehaviour
 {
     public PhotonView _pv;
-    public Camera _camera;
+    Camera _camera;
     AudioListener _al;
 
     void Start()
     {
         _al = GetComponentInChildren<AudioListener>();
+        _camera = GetComponentInChildren<Camera>();
 
         if (_pv.IsMine)
         {
             // 로컬 플레이어의 AudioListener 활성화
             if (_al != null)
                 _al.enabled = true;
+
+            _camera.enabled = true;
         }
         else
         {
             if (_al != null)
                 _al.enabled = false;
+            
+            _camera.enabled = false;
         }
     }
 

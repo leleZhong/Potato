@@ -30,8 +30,6 @@ public class SoundManager : MonoBehaviour
         {
             _settings._soundManager = this;
 
-            _BGMList[0].playOnAwake = true; // BGM 추가
-            _BGMList[0].loop = true;
             InitializeSlider();
             LoadSettings();
         }

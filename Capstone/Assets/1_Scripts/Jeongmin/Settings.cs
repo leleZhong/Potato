@@ -16,7 +16,8 @@ public class Settings : MonoBehaviour
 
     void Start()
     {
-        Canvas canvas = FindObjectOfType<Canvas>(); // 씬에서 Canvas를 찾음
+        Canvas canvas = GameObject.Find("JM_UI").GetComponent<Canvas>(); // 씬에서 Canvas를 찾음
+        
         if (canvas != null && _settingsPanelPrefab != null)
         {
             _settingsPanelInstance = Instantiate(_settingsPanelPrefab, canvas.transform);
