@@ -1,27 +1,31 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ButtonInteraction : MonoBehaviour
 {
     public GameObject interactionUI; // 상호작용 UI
     private GameObject currentInteractable; // 현재 상호작용 가능한 오브젝트
-    public Animator animator1;
-    public Animator animator2;
+    public Animator doorAnimator; // 문 애니메이터 (미리 할당)
+    public Button button;
+    private static readonly string DoorOpen = "DoorOpen";
 
     void Start()
     {
         interactionUI.SetActive(false); // 처음에 UI를 비활성화
-        animator1 = GetComponent<Animator>();
-        animator2 = GetComponent<Animator>();
     }
-
-    
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Interaction") || other.CompareTag("CorrectNumber"))
         {
             interactionUI.SetActive(true); // 상호작용 UI 활성화
-            currentInteractable = other.gameObject; // 현재 상호작용 가능한 오브젝트 설정
+
+            // 만약 해당 오브젝트가 CorrectNumber 태그를 가지고 있다면 currentInteractable로 설정
+            if (other.CompareTag("CorrectNumber"))
+            {
+                currentInteractable = other.gameObject;
+            }
         }
     }
 
@@ -30,24 +34,45 @@ public class ButtonInteraction : MonoBehaviour
         if (other.CompareTag("Interaction") || other.CompareTag("CorrectNumber"))
         {
             interactionUI.SetActive(false); // 상호작용 UI 비활성화
-            currentInteractable = null; // 현재 상호작용 가능한 오브젝트 해제
+
+            // 현재 상호작용 오브젝트가 나가는 오브젝트와 동일한 경우 해제
+            if (currentInteractable == other.gameObject)
+            {
+                currentInteractable = null;
+            }
         }
     }
 
-    public void InteractWithObject()
+    public void OnClickButton()
     {
+        // currentInteractable이 CorrectNumber 태그를 가지고 있는 경우에만 문 열기 애니메이션 실행
         if (currentInteractable != null && currentInteractable.CompareTag("CorrectNumber"))
         {
-            // CorrectNumber 태그를 가진 오브젝트와 상호작용했을 때 DoorOpen 애니메이션 재생
-            Animator doorAnimator = currentInteractable.GetComponent<Animator>();
             if (doorAnimator != null)
             {
-                doorAnimator.SetTrigger("DoorOpen");
+                doorAnimator.SetBool(DoorOpen, true);
             }
         }
         else
         {
-            // 다른 상호작용 처리 (필요한 경우 추가)
+            // 잘못된 상호작용일 때 버튼을 빨간색으로 변경
+            if (button.targetGraphic != null)
+            {
+                StartCoroutine(ChangeButtonColorTemporarily(Color.red, 3f));
+            }
         }
     }
+
+    private IEnumerator ChangeButtonColorTemporarily(Color color, float duration)
+    {
+        // 기존 색상을 저장
+        Color originalColor = button.targetGraphic.color;
+        // 색상을 변경
+        button.targetGraphic.color = color;
+        // duration만큼 대기
+        yield return new WaitForSeconds(duration);
+        // 원래 색상으로 복원
+        button.targetGraphic.color = originalColor;
+    }
+
 }
