@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class StageClear : MonoBehaviour
 {
-    bool stage1clear = false;
-    bool stage2clear = false;
-    bool stage3clear = false;
+    public bool stage1clear = false;
+    public bool stage2clear = false;
+    public bool stage3clear = false;
     
     public Animator[] _doors;
     public GameObject _portal1;

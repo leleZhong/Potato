@@ -16,6 +16,12 @@ public class Interaction : MonoBehaviour
         List<int> InteractionNumbers = new List<int>() { 0, 1, 2, 3, 4 }; // 생성 후보 번호들
         int answerIndex = Random.Range(0, blockPrefabs.Length); // CorrectNumber 프리팹 인덱스 선택
         GameObject duplicatedBlock = blockPrefabs[answerIndex];
+        
+        for(int i = 0; i < 5; i++)
+        {
+            blockPrefabs[i].tag = "Interaction";
+        }
+
         duplicatedBlock.tag = "CorrectNumber";
 
         if (duplicatedBlock != null)

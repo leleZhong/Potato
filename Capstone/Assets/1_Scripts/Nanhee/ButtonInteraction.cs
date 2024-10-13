@@ -9,10 +9,12 @@ public class ButtonInteraction : MonoBehaviour
     public Animator doorAnimator; // 문 애니메이터 (미리 할당)
     public Button button;
     private static readonly string DoorOpen = "DoorOpen";
+    private StageClear stageclear;
 
     void Start()
     {
         interactionUI.SetActive(false); // 처음에 UI를 비활성화
+        
     }
 
     void OnTriggerEnter(Collider other)
@@ -45,12 +47,19 @@ public class ButtonInteraction : MonoBehaviour
 
     public void OnClickButton()
     {
+        stageclear = GameObject.Find("StageClear").GetComponent<StageClear>();
+        
         // currentInteractable이 CorrectNumber 태그를 가지고 있는 경우에만 문 열기 애니메이션 실행
         if (currentInteractable != null && currentInteractable.CompareTag("CorrectNumber"))
         {
             if (doorAnimator != null)
             {
                 doorAnimator.SetBool(DoorOpen, true);
+                //stageclear.SetBool(true);
+                if(stageclear != null)
+                {
+                    stageclear.stage3clear = true;
+                }
             }
         }
         else

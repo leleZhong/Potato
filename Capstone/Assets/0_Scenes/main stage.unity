@@ -5647,7 +5647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionUI: {fileID: 206810805}
-  doorAnimator: {fileID: 0}
+  doorAnimator: {fileID: 1264090432}
   button: {fileID: 90243808}
 --- !u!1 &454624207 stripped
 GameObject:

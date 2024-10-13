@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1539510210275215421}
   m_Layer: 0
   m_Name: 2
-  m_TagString: Block
+  m_TagString: Interaction
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
