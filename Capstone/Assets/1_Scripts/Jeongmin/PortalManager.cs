@@ -12,7 +12,7 @@ public class PortalManager : MonoBehaviour
     public GameObject _portal1;
     public GameObject _portal2;
 
-    public void EnteredPortal(GameObject portal, string tag)
+    public void EnteredPortal(GameObject portal, string tag, string sceneName)
     {
         if (portal == _portal1 && tag == _playerTag)
             _isP1InPortal = true;
@@ -20,14 +20,17 @@ public class PortalManager : MonoBehaviour
         if (portal == _portal2 && tag == _playerTag)
             _isP2InPortal = true;
 
-        CheckBothPlayersInPortal();
+        CheckBothPlayersInPortal(sceneName);
     }
 
-    void CheckBothPlayersInPortal()
+    void CheckBothPlayersInPortal(string sceneName)
     {
         if (_isP1InPortal && _isP2InPortal)
         {
-            SceneManager.LoadScene(2);
+            if (sceneName == "Tutorial")
+                SceneManager.LoadScene(2);
+            if (sceneName == "main stage")
+                SceneManager.LoadScene(3);
         }
     }
 }

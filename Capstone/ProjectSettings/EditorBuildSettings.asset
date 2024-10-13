@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/0_Scenes/main stage.unity
     guid: 8f848d5cc8b3b6f4fab2bf56329cd5a5
+  - enabled: 1
+    path: Assets/0_Scenes/Cinematic.unity
+    guid: 0e04c45d4dd8c3146be8de842c81dc4d
   m_configObjects: {}

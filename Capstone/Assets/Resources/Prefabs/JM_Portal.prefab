@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4548930501596151427}
   - component: {fileID: 146252837598099004}
   - component: {fileID: 7465473455849024795}
+  - component: {fileID: 6328357056336387628}
   m_Layer: 0
   m_Name: JM_Portal
   m_TagString: portal
@@ -106,6 +107,19 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 2.0574102
   m_Center: {x: -0.000003703122, y: 0.11292513, z: 1.1952949}
+--- !u!114 &6328357056336387628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4861965507272341280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5949623a4815bc42a6d115f24f98cba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pm: {fileID: 0}
 --- !u!1 &6414567478954970792
 GameObject:
   m_ObjectHideFlags: 0
