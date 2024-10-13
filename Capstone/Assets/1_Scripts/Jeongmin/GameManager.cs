@@ -1,9 +1,8 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Photon.Pun;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -29,14 +28,18 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else if (Instance != this)
             Destroy(this.gameObject);
     }
 
-    void Initialize()
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        ConnectAndCreatePlayer();
+        GameObject managers = GameObject.Find("@Managers");
+
+        talkManager = managers.GetComponentInChildren<TalkManager>();
+        stageManager = managers.GetComponentInChildren<StageManager>();
     }
 
     public void ConnectAndCreatePlayer()
@@ -97,5 +100,10 @@ public class GameManager : MonoBehaviour
         
         _isAction = true;
         _talkIndex++;
+    }
+
+    void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

@@ -33,18 +33,21 @@ public class PlayerSetup : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (_pv.IsMine)
         {
-            Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out RaycastHit hit))
+            if (Input.GetMouseButtonDown(0))
             {
-                GameObject clickedObject = hit.transform.gameObject;
-                ObjData objData = clickedObject.GetComponent<ObjData>();
-                
-                if (objData != null) // ObjData ????? ?? ??? Action? ??
+                Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(ray, out RaycastHit hit))
                 {
-                    GameManager.Instance.Action(clickedObject);
+                    GameObject clickedObject = hit.transform.gameObject;
+                    ObjData objData = clickedObject.GetComponent<ObjData>();
+                    
+                    if (objData != null) // ObjData ????? ?? ??? Action? ??
+                    {
+                        GameManager.Instance.Action(clickedObject);
+                    }
                 }
             }
         }
