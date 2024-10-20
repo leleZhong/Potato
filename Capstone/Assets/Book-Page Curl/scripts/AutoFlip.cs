@@ -38,6 +38,7 @@ public class AutoFlip : MonoBehaviour {
         float h = Mathf.Abs(ControledBook.EndBottomRight.y) * 0.9f;
         float dx = (xl)*2 / AnimationFramesCount;
         StartCoroutine(FlipRTL(xc, xl, h, frameTime, dx));
+        
     }
     public void FlipLeftPage()
     {
@@ -112,7 +113,7 @@ public class AutoFlip : MonoBehaviour {
     {
         float x = xc - xl;
         float y = (-h / (xl * xl)) * (x - xc) * (x - xc);
-        ControledBook.DragLeftPageToPoint(new Vector3(x, y, 0));
+        //ControledBook.DragLeftPageToPoint(new Vector3(x, y, 0));
         for (int i = 0; i < AnimationFramesCount; i++)
         {
             y = (-h / (xl * xl)) * (x - xc) * (x - xc);

@@ -6,6 +6,8 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 public enum FlipMode
 {
     RightToLeft,
@@ -20,6 +22,7 @@ public class Book : MonoBehaviour {
     public Sprite[] bookPages;
     public bool interactable=true;
     public bool enableShadowEffect=true;
+    public UnityEngine.UI.Image blackScreen;  // 암전을 위한 UI Image
     //represent the index of the sprite shown in the right page
     public int currentPage = 0;
     public int TotalPageCount
@@ -41,14 +44,14 @@ public class Book : MonoBehaviour {
             return BookPanel.rect.height ; 
         }
     }
-    public Image ClippingPlane;
-    public Image NextPageClip;
-    public Image Shadow;
-    public Image ShadowLTR;
-    public Image Left;
-    public Image LeftNext;
-    public Image Right;
-    public Image RightNext;
+    public UnityEngine.UI.Image ClippingPlane;
+    public UnityEngine.UI.Image NextPageClip;
+    public UnityEngine.UI.Image Shadow;
+    public UnityEngine.UI.Image ShadowLTR;
+    public UnityEngine.UI.Image Left;
+    public UnityEngine.UI.Image LeftNext;
+    public UnityEngine.UI.Image Right;
+    public UnityEngine.UI.Image RightNext;
     public UnityEvent OnFlip;
     float radius1, radius2;
     //Spine Bottom
@@ -94,6 +97,18 @@ public class Book : MonoBehaviour {
         ShadowLTR.rectTransform.sizeDelta = new Vector2(pageWidth, shadowPageHeight);
         ShadowLTR.rectTransform.pivot = new Vector2(0, (pageWidth / 2) / shadowPageHeight);
 
+        if (blackScreen)
+        {
+            blackScreen.gameObject.SetActive(false);
+            blackScreen.color = new Color(0, 0, 0, 0);
+
+            blackScreen.transform.SetAsLastSibling();
+
+            blackScreen.rectTransform.anchorMin = new Vector2(0, 0);
+            blackScreen.rectTransform.anchorMax = new Vector2(1, 1);
+            blackScreen.rectTransform.offsetMin = Vector2.zero;
+            blackScreen.rectTransform.offsetMax = Vector2.zero;
+        }
     }
 
     private void CalcCurlCriticalPoints()
@@ -281,7 +296,6 @@ public class Book : MonoBehaviour {
         mode = FlipMode.RightToLeft;
         f = point;
 
-
         NextPageClip.rectTransform.pivot = new Vector2(0, 0.12f);
         ClippingPlane.rectTransform.pivot = new Vector2(1, 0.35f);
 
@@ -291,7 +305,7 @@ public class Book : MonoBehaviour {
         Left.transform.eulerAngles = new Vector3(0, 0, 0);
         Left.sprite = (currentPage < bookPages.Length) ? bookPages[currentPage] : background;
         Left.transform.SetAsFirstSibling();
-        
+
         Right.gameObject.SetActive(true);
         Right.transform.position = RightNext.transform.position;
         Right.transform.eulerAngles = new Vector3(0, 0, 0);
@@ -302,47 +316,75 @@ public class Book : MonoBehaviour {
         LeftNext.transform.SetAsFirstSibling();
         if (enableShadowEffect) Shadow.gameObject.SetActive(true);
         UpdateBookRTLToPoint(f);
+
+        if (currentPage >= 5)
+        {
+            StartCoroutine(FadeOutAndLoadScene("Ending"));
+        }
     }
+
+    private IEnumerator FadeOutAndLoadScene(string sceneName)
+    {
+        blackScreen.gameObject.SetActive(true); // blackScreen 활성화
+        float duration = 8.0f;  // 5초 동안 암전
+        float time = 0;
+
+        // 암전 효과
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            if (blackScreen)
+            {
+                // 알파 값을 0에서 1로 서서히 변경
+                blackScreen.color = new Color(0, 0, 0, Mathf.Lerp(0, 1, time / duration));
+            }
+            yield return null; // 매 프레임마다 갱신
+        }
+
+        // 씬 로드
+        SceneManager.LoadScene(sceneName);
+    }
+
     public void OnMouseDragRightPage()
     {
         if (interactable)
         DragRightPageToPoint(transformPoint(Input.mousePosition));
         
     }
-    public void DragLeftPageToPoint(Vector3 point)
-    {
-        if (currentPage <= 0) return;
-        pageDragging = true;
-        mode = FlipMode.LeftToRight;
-        f = point;
+    //public void DragLeftPageToPoint(Vector3 point)
+    //{
+    //    if (currentPage <= 0) return;
+    //    pageDragging = true;
+    //    mode = FlipMode.LeftToRight;
+    //    f = point;
 
-        NextPageClip.rectTransform.pivot = new Vector2(1, 0.12f);
-        ClippingPlane.rectTransform.pivot = new Vector2(0, 0.35f);
+    //    NextPageClip.rectTransform.pivot = new Vector2(1, 0.12f);
+    //    ClippingPlane.rectTransform.pivot = new Vector2(0, 0.35f);
 
-        Right.gameObject.SetActive(true);
-        Right.transform.position = LeftNext.transform.position;
-        Right.sprite = bookPages[currentPage - 1];
-        Right.transform.eulerAngles = new Vector3(0, 0, 0);
-        Right.transform.SetAsFirstSibling();
+    //    Right.gameObject.SetActive(true);
+    //    Right.transform.position = LeftNext.transform.position;
+    //    Right.sprite = bookPages[currentPage - 1];
+    //    Right.transform.eulerAngles = new Vector3(0, 0, 0);
+    //    Right.transform.SetAsFirstSibling();
 
-        Left.gameObject.SetActive(true);
-        Left.rectTransform.pivot = new Vector2(1, 0);
-        Left.transform.position = LeftNext.transform.position;
-        Left.transform.eulerAngles = new Vector3(0, 0, 0);
-        Left.sprite = (currentPage >= 2) ? bookPages[currentPage - 2] : background;
+    //    Left.gameObject.SetActive(true);
+    //    Left.rectTransform.pivot = new Vector2(1, 0);
+    //    Left.transform.position = LeftNext.transform.position;
+    //    Left.transform.eulerAngles = new Vector3(0, 0, 0);
+    //    Left.sprite = (currentPage >= 2) ? bookPages[currentPage - 2] : background;
 
-        LeftNext.sprite = (currentPage >= 3) ? bookPages[currentPage - 3] : background;
+    //    LeftNext.sprite = (currentPage >= 3) ? bookPages[currentPage - 3] : background;
 
-        RightNext.transform.SetAsFirstSibling();
-        if (enableShadowEffect) ShadowLTR.gameObject.SetActive(true);
-        UpdateBookLTRToPoint(f);
-    }
-    public void OnMouseDragLeftPage()
-    {
-        if (interactable)
-        DragLeftPageToPoint(transformPoint(Input.mousePosition));
+    //    RightNext.transform.SetAsFirstSibling();
+    //    if (enableShadowEffect) ShadowLTR.gameObject.SetActive(true);
+    //    UpdateBookLTRToPoint(f);
+    //  
+    //public void OnMouseDragLeftPage()
+    //{
+    //    if (interactable)
+    //    DragLeftPageToPoint(transformPoint(Input.mousePosition));
         
-    }
+    //}
     public void OnMouseRelease()
     {
         if (interactable)
@@ -382,6 +424,7 @@ public class Book : MonoBehaviour {
             currentPage += 2;
         else
             currentPage -= 2;
+
         LeftNext.transform.SetParent(BookPanel.transform, true);
         Left.transform.SetParent(BookPanel.transform, true);
         LeftNext.transform.SetParent(BookPanel.transform, true);
@@ -394,6 +437,12 @@ public class Book : MonoBehaviour {
         ShadowLTR.gameObject.SetActive(false);
         if (OnFlip != null)
             OnFlip.Invoke();
+
+        // Flip 후 페이지가 5가 되었을 때 "Ending" 씬 로드
+        if (currentPage >= 5)
+        {
+            StartCoroutine(FadeOutAndLoadScene("Ending"));
+        }
     }
     public void TweenBack()
     {
