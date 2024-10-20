@@ -58,26 +58,26 @@ public class Character : MonoBehaviour
         audioSource = FindAnyObjectByType<AudioSource>();
         _tf = GetComponent<Transform>();
 
-        if (Camera.main == null)
-        {
-            Debug.LogError("Main Camera is not found!");
-        }
-        else
-        {
-            var cameraController = Camera.main.GetComponent<CameraController>();
-            if (cameraController != null)
-            {
-                Transform cameraTransform = _tf.Find("Camera1");
-                if (cameraTransform != null)
-                {
-                    cameraController._target = cameraTransform;
-                }
-            }
-            else
-            {
-                Debug.LogError("CameraController component not found on Main Camera!");
-            }
-        }
+        // if (Camera.main == null)
+        // {
+        //     Debug.LogError("Main Camera is not found!");
+        // }
+        // else
+        // {
+        //     var cameraController = Camera.main.GetComponent<CameraController>();
+        //     if (cameraController != null)
+        //     {
+        //         Transform cameraTransform = _tf.Find("Camera1");
+        //         if (cameraTransform != null)
+        //         {
+        //             cameraController._target = cameraTransform;
+        //         }
+        //     }
+        //     else
+        //     {
+        //         Debug.LogError("CameraController component not found on Main Camera!");
+        //     }
+        // }
 
         if (playerCamera != null)
         {
@@ -110,9 +110,12 @@ public class Character : MonoBehaviour
 
     void Update()
     {
-        Aim();
-        Move();
-        Jump();
+        if (_pv.IsMine)
+        {
+            Aim();
+            Move();
+            Jump();
+        }
     }
 
     public void GetInput()

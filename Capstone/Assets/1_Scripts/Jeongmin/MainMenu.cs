@@ -29,11 +29,6 @@ public class MainMenu : MonoBehaviour
         _alertPanel.SetActive(true);
     }
 
-    public void OnClickYes()
-    {
-        SceneManager.LoadScene("Tutorial");
-    }
-
     public void OnClickNo()
     {
         _alertPanel.SetActive(false);
@@ -81,7 +76,7 @@ public class MainMenu : MonoBehaviour
     {
         Debug.Log("OnLoadingFinish");
         _loading.gameObject.SetActive(false);
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("Tutorial");
     }
 
     public void OnClickExit()

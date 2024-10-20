@@ -70,7 +70,7 @@ public class ColorCounter : MonoBehaviour
         Transform existingSphere = transform.Find("Sphere");
         if (existingSphere == null)
         {
-            Debug.Log("Sphere 오브젝트가 없습니다.");
+            // Debug.Log("Sphere 오브젝트가 없습니다.");
             return; // Sphere가 없으면 Update 함수 종료
         }
 

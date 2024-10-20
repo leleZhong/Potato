@@ -14,7 +14,7 @@ public class ExplosionEffect : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         // 충돌한 물체의 태그가 "letter"인 경우에만 폭발
-        Debug.Log("Collision detected with: " + collision.gameObject.name);
+        // Debug.Log("Collision detected with: " + collision.gameObject.name);
         if (collision.gameObject.CompareTag("letter"))
         {
             Explode();

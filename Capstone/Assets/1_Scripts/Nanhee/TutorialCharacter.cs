@@ -49,7 +49,7 @@ public class TutorialCharacter : MonoBehaviour
 
         if (Camera.main == null)
         {
-            Debug.LogError("Main Camera is not found!");
+            // Debug.LogError("Main Camera is not found!");
         }
         else
         {
@@ -74,7 +74,7 @@ public class TutorialCharacter : MonoBehaviour
 
         if (playerCamera != null)
         {
-            playerCamera.gameObject.AddComponent<AudioListener>();
+            // playerCamera.gameObject.AddComponent<AudioListener>();
         }
         else
         {

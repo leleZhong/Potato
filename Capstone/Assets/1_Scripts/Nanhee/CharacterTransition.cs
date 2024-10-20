@@ -4,8 +4,8 @@ using UnityEngine.Rendering.PostProcessing;
 public class CharacterTransition : MonoBehaviour
 {
     public GameObject oldCharacter; // 기존 캐릭터
-    public GameObject newCharacterPrefab; // 새 캐릭터 프리팹
-    public Vector3 spawnPosition; // 새 캐릭터의 스폰 위치
+    // public GameObject newCharacterPrefab; // 새 캐릭터 프리팹
+    // public Vector3 spawnPosition; // 새 캐릭터의 스폰 위치
     public int newLayer; // 새 캐릭터에 적용될 레이어
     public PostProcessVolume postProcessVolume; // Vignette가 적용된 PostProcessVolume
     public float vignetteTargetIntensity = 1.0f; // 목표 Vignette intensity
@@ -15,6 +15,9 @@ public class CharacterTransition : MonoBehaviour
     private Vignette vignette;
     private float currentTime = 0f;
     private bool transitionStarted = false;
+
+    // TutorialManager 참조
+    public TutorialManager tutorialManager;
 
     private void Start()
     {
@@ -48,23 +51,22 @@ public class CharacterTransition : MonoBehaviour
         // 기존 캐릭터 삭제
         Destroy(oldCharacter);
 
-        // 새로운 캐릭터 생성 및 레이어 변경
-        GameObject newCharacter = Instantiate(newCharacterPrefab, spawnPosition, Quaternion.identity);
-        Camera cameraInNewCharacter = newCharacter.GetComponentInChildren<Camera>();
-        if (cameraInNewCharacter != null)
-        {
-            cameraInNewCharacter.gameObject.layer = newLayer;
-        }
+        // // 새로운 캐릭터 생성 및 레이어 변경
+        // GameObject newCharacter = Instantiate(newCharacterPrefab, spawnPosition, Quaternion.identity);
+        // Camera cameraInNewCharacter = newCharacter.GetComponentInChildren<Camera>();
+        // if (cameraInNewCharacter != null)
+        // {
+        //     cameraInNewCharacter.gameObject.layer = newLayer;
+        // }
+        // else
+        // {
+        //     Debug.LogWarning("새 캐릭터에 카메라가 존재하지 않습니다.");
+        // }
+
+        // TutorialManager에서 캐릭터 생성 처리
+        if (tutorialManager != null)
+            tutorialManager.SpawnPlayers();
         else
-        {
-            Debug.LogWarning("새 캐릭터에 카메라가 존재하지 않습니다.");
-        }
-
-       
+            Debug.Log("TutorialManager를 할당해야 합니다.");
     }
-
-
-
-
-
 }

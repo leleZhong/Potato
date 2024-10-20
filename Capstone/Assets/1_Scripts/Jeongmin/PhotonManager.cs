@@ -43,7 +43,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log("Joined Room");
-        GameManager.Instance._isConnect = true;
+        // GameManager.Instance._isConnect = true;
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -83,7 +83,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         Debug.Log("All players ready. Starting game.");
 
         
-        GameManager.Instance.ConnectAndCreatePlayer();
+        // GameManager.Instance.ConnectAndCreatePlayer();
         
 
         if (_mainMenu != null)

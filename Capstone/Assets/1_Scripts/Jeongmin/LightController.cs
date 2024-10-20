@@ -6,7 +6,7 @@ public class LightController : MonoBehaviour
 {
     public GameObject _gamePanel;
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         if(other.gameObject.tag == "Player")
             _gamePanel.SetActive(true);

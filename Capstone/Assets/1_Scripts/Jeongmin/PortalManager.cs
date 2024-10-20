@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PortalManager : MonoBehaviour
 {
-    bool _isP1InPortal = false;
-    bool _isP2InPortal = false;
+    public bool _isP1InPortal = false;
+    public bool _isP2InPortal = false;
     string _playerTag = "Player";
 
     public GameObject _portal1;
@@ -28,7 +28,7 @@ public class PortalManager : MonoBehaviour
         if (_isP1InPortal && _isP2InPortal)
         {
             if (sceneName == "Tutorial")
-                SceneManager.LoadScene(2);
+                SceneManager.LoadScene("main stage");
             if (sceneName == "main stage")
                 SceneManager.LoadScene(3);
         }

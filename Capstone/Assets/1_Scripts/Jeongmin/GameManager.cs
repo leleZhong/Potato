@@ -42,17 +42,13 @@ public class GameManager : MonoBehaviour
         stageManager = managers.GetComponentInChildren<StageManager>();
     }
 
-    public void ConnectAndCreatePlayer()
+    void Start()
     {
-        Debug.Log("ConnectAndCreatePlayer");
-        StartCoroutine(CreatePlayer());
+        CreatePlayer();
     }
 
-    IEnumerator CreatePlayer()
+    public void CreatePlayer()
     {
-        Debug.Log("Waiting for connection...");
-        yield return new WaitUntil(() => _isConnect);
-
         _spawnPoints[0] = GameObject.Find("JM_P1").transform.Find("SpawnPoint1").transform;
         _spawnPoints[1] = GameObject.Find("JM_P2").transform.Find("SpawnPoint2").transform;
 
@@ -62,7 +58,7 @@ public class GameManager : MonoBehaviour
         Vector3 pos = _spawnPoints[playerIndex].position;
         Quaternion rot = _spawnPoints[playerIndex].rotation;
 
-        GameObject playerTemp = PhotonNetwork.Instantiate("Player", pos, rot, 0);
+        PhotonNetwork.Instantiate("Player", pos, rot, 0);
     }
 
     public void Action(GameObject scanObj)
