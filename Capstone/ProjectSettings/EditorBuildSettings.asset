@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/0_Scenes/Cinematic.unity
     guid: 0e04c45d4dd8c3146be8de842c81dc4d
+  - enabled: 1
+    path: Assets/0_Scenes/Ending.unity
+    guid: 10c75ff5c25b35f44ac6480e75213ab2
   m_configObjects: {}

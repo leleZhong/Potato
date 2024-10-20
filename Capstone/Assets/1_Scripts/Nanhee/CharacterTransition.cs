@@ -68,5 +68,6 @@ public class CharacterTransition : MonoBehaviour
             tutorialManager.SpawnPlayers();
         else
             Debug.Log("TutorialManager를 할당해야 합니다.");
+        gameObject.layer = newLayer;
     }
 }

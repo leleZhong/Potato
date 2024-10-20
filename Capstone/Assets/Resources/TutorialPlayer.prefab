@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 3450498873245319290}
   - component: {fileID: 1862258452035016553}
   - component: {fileID: 3648848806019922855}
+  - component: {fileID: 7868310468072926458}
   m_Layer: 0
   m_Name: TutorialPlayer
   m_TagString: Player
@@ -340,6 +341,23 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &7868310468072926458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2213006756633148338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4954ee7382e9fc84d8127776196f3f05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterBody: {fileID: 4320710550218525737, guid: 3fde80290d55f7045aed81b18ac7f82c, type: 3}
+  playerCamera: {fileID: 863904973795812565, guid: 3fde80290d55f7045aed81b18ac7f82c, type: 3}
+  applySpeed: 2
+  _pv: {fileID: 0}
+  mouseSensitivity: 100
 --- !u!1 &7683098542305043773
 GameObject:
   m_ObjectHideFlags: 0
