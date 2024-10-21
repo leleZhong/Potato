@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
@@ -18,6 +19,8 @@ public class CharacterTransition : MonoBehaviour
 
     // TutorialManager 참조
     public TutorialManager tutorialManager;
+    public PhotonView _pv;
+    public Camera _camera;
 
     private void Start()
     {
@@ -34,8 +37,8 @@ public class CharacterTransition : MonoBehaviour
 
         if (currentTime >= 19f && !transitionStarted)
         {
-            transitionStarted = true;
             StartTransition();
+            SetCameraLayer();
         }
 
         // Vignette intensity가 점진적으로 증가하도록 설정
@@ -68,6 +71,24 @@ public class CharacterTransition : MonoBehaviour
             tutorialManager.SpawnPlayers();
         else
             Debug.Log("TutorialManager를 할당해야 합니다.");
-        gameObject.layer = newLayer;
+
+        if (vignette != null)
+        {
+            vignette.intensity.value = 0f;  // Vignette 초기화
+            transitionStarted = true;  // Vignette 효과 적용 시작
+        }
+    }
+
+    void SetCameraLayer()
+    {
+        GameObject[] allPlayers = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject player in allPlayers)
+        {
+            _pv = player.GetComponent<PhotonView>();
+            _camera = player.GetComponentInChildren<Camera>();
+
+            if (_pv.IsMine)
+                _camera.gameObject.layer = newLayer;
+        }
     }
 }
