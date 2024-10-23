@@ -12,6 +12,9 @@ public class CanvasDelayActivator : MonoBehaviour
 
         // 10초 후에 캔버스를 활성화시키는 코루틴 실행
         StartCoroutine(ActivateCanvasAfterDelay(26f));
+       
+       
+
     }
 
     // 딜레이 후 캔버스를 활성화시키는 코루틴
