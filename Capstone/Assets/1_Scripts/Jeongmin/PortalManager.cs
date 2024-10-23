@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using ExitGames.Client.Photon.StructWrapping;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -30,7 +31,7 @@ public class PortalManager : MonoBehaviour
             if (sceneName == "Tutorial")
                 SceneManager.LoadScene("main stage");
             if (sceneName == "main stage")
-                SceneManager.LoadScene(3);
+                SceneManager.LoadScene("Cinematic");
         }
     }
 }

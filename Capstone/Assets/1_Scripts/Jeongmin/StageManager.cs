@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class StageManager : MonoBehaviour
 {
-    public static StageManager Instance;
-
     // 퍼즐
     [Header("[Puzzle]")]
     public GameObject[] _objectsP1;
@@ -18,18 +16,10 @@ public class StageManager : MonoBehaviour
 
     // 스테이지 클리어
     [Header("[Stage Clear]")]
+    public StageClear stageClear;
+
     public Renderer[] _answerP1;
     public Renderer[] _answerP2;
-    public GameObject _portal;
-    public GameObject _portalLight;
-
-    void Awake()
-    {
-        Instance = this;
-
-        _portalLight.SetActive(false);
-        _portal.GetComponent<SphereCollider>().enabled = false;
-    }
 
     public void StageClear()
     {
@@ -76,9 +66,7 @@ public class StageManager : MonoBehaviour
 
         if (isP1Correct && isP2Correct)
         {
-            _portalLight.SetActive(true);
-            _portal.GetComponent<SphereCollider>().enabled = true;
-            Debug.Log("Stage Clear 호출");
+            stageClear.stage1clear = true;
         }
     }
 
