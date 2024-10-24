@@ -24490,9 +24490,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8db1e522d1f3c3243a128cc7f88af5f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stage1clear: 0
-  stage2clear: 0
-  stage3clear: 0
+  stage1clear: 1
+  stage2clear: 1
+  stage3clear: 1
   _door1:
   - {fileID: 9041272009635326848}
   - {fileID: 1903153438}

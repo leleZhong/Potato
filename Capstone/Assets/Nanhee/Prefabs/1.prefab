@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6337497686378894361}
   m_Layer: 0
   m_Name: 1
-  m_TagString: Interaction
+  m_TagString: CorrectNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

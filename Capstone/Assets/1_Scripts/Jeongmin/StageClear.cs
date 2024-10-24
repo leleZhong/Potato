@@ -29,8 +29,8 @@ public class StageClear : MonoBehaviour
         }
         if (stage3clear)
         {
-            _door2[0].SetBool("isClear", true);
-            _door2[1].SetBool("isClear", true);
+            _door3[0].SetBool("isClear", true);
+            _door3[1].SetBool("isClear", true);
         }
     }
 }
