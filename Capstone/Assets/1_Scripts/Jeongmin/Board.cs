@@ -11,8 +11,8 @@ public class Board : MonoBehaviour
 
 	private	List<Tile>	tileList;								// 생성한 타일 정보 저장
 
-	private	Vector2Int	puzzleSize = new Vector2Int(4, 4);		// 4x4 퍼즐
-	private	float		neighborTileDistance = 102;				// 인접한 타일 사이의 거리
+	private	Vector2Int	puzzleSize = new Vector2Int(3, 3);		// 3x3 퍼즐
+	private	float		neighborTileDistance = 122;				// 인접한 타일 사이의 거리
 
 	public	Vector3		EmptyTilePosition { set; get; }			// 빈 타일의 위치
 

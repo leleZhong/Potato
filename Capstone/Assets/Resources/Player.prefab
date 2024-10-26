@@ -122,7 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterBody: {fileID: 6175636507118032499}
   playerCamera: {fileID: 1860407956793860388}
-  applySpeed: 4
+  applySpeed: 8
   _pv: {fileID: 5040785663825658260}
   mouseSensitivity: 100
   audioSource: {fileID: 0}
