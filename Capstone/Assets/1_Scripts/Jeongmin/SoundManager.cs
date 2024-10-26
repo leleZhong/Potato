@@ -14,7 +14,7 @@ public class SoundManager : MonoBehaviour
     void Awake()
     {
         transform.SetParent(null);
-        DontDestroyOnLoad(gameObject); // SoundManager 객체를 파괴하지 않도록 설정
+        // DontDestroyOnLoad(gameObject); // SoundManager 객체를 파괴하지 않도록 설정
 
         // 효과음용 AudioSource 생성
         _effectSource = gameObject.AddComponent<AudioSource>();

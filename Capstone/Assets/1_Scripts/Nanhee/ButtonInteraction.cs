@@ -54,7 +54,7 @@ public class ButtonInteraction : MonoBehaviour
         {
             if (doorAnimator != null)
             {
-                doorAnimator.SetBool(DoorOpen, true);
+                // doorAnimator.SetBool(DoorOpen, true);
                 //stageclear.SetBool(true);
                 if(stageclear != null)
                 {
