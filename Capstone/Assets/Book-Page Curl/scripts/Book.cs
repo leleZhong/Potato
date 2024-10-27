@@ -326,7 +326,7 @@ public class Book : MonoBehaviour {
     private IEnumerator FadeOutAndLoadScene(string sceneName)
     {
         blackScreen.gameObject.SetActive(true); // blackScreen 활성화
-        float duration = 8.0f;  // 5초 동안 암전
+        float duration = 8.0f;  // 8초 동안 암전
         float time = 0;
 
         // 암전 효과
