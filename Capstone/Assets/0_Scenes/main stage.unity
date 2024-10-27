@@ -1437,7 +1437,7 @@ GameObject:
   - component: {fileID: 90243810}
   - component: {fileID: 90243809}
   - component: {fileID: 90243808}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: InteractionButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1451,13 +1451,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 90243805}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2131073631}
-  m_Father: {fileID: 206810806}
+  m_Father: {fileID: 274065679}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2521,7 +2521,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 156803777}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Interaction_BlockPos5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3257,13 +3257,13 @@ GameObject:
   - component: {fileID: 206810809}
   - component: {fileID: 206810808}
   - component: {fileID: 206810807}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: InteractionUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &206810806
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3277,7 +3277,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 274065679}
-  - {fileID: 90243806}
   m_Father: {fileID: 850719398}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3991,7 +3990,7 @@ GameObject:
   - component: {fileID: 274065679}
   - component: {fileID: 274065681}
   - component: {fileID: 274065680}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4009,7 +4008,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 90243806}
   m_Father: {fileID: 206810806}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5728,8 +5728,8 @@ GameObject:
   m_Component:
   - component: {fileID: 454567377}
   - component: {fileID: 454567378}
-  - component: {fileID: 454567379}
-  m_Layer: 0
+  - component: {fileID: 454567380}
+  m_Layer: 7
   m_Name: Interaction_Cube_List
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5780,7 +5780,7 @@ MonoBehaviour:
   - {fileID: 2093371142827659934, guid: 6875d3073f2761448b00338467b4e1a5, type: 3}
   - {fileID: 4052364516579794679, guid: 45c044bbc72485247960af4641b4e209, type: 3}
   - {fileID: 1781567509440022735, guid: 16bb77bc4dbea7643bf8481b9cf0fe77, type: 3}
---- !u!114 &454567379
+--- !u!114 &454567380
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5789,12 +5789,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 454567376}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ccad33560e51404781a852baa743378, type: 3}
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionUI: {fileID: 206810805}
-  doorAnimator: {fileID: 1264090432}
-  button: {fileID: 90243808}
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &454624207 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4002184407397249878, guid: 2c6995d1aa17b674d926308855f17b82, type: 3}
@@ -7292,7 +7299,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &605709045
 Transform:
   m_ObjectHideFlags: 0
@@ -16359,7 +16366,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1378714823}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Interaction_BlockPos3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18023,7 +18030,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1532423213
 Transform:
   m_ObjectHideFlags: 0
@@ -18931,7 +18938,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1607930380}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Interaction_BlockPos4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22155,7 +22162,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1829706261}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Interaction_BlockPos2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25397,7 +25404,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2092443399}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Interaction_BlockPos1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25794,7 +25801,7 @@ GameObject:
   - component: {fileID: 2131073631}
   - component: {fileID: 2131073633}
   - component: {fileID: 2131073632}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
