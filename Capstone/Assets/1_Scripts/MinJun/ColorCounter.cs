@@ -1,4 +1,5 @@
 using TMPro;
+using Photon.Pun;
 using UnityEngine;
 
 public class ColorCounter : MonoBehaviour
@@ -25,6 +26,8 @@ public class ColorCounter : MonoBehaviour
     [SerializeField] private StageClear stageClear; // StageClear 참조
 
     GameObject mjUI;
+
+    private PhotonView photonView;
 
     void Awake()
     {
@@ -154,8 +157,6 @@ public class ColorCounter : MonoBehaviour
             }
         }
     }
-
-    // 클리어 조건을 체크하는 함수
     private void CheckStageClearCondition()
     {
         // 클리어 조건 정확히 일치 시
@@ -163,17 +164,8 @@ public class ColorCounter : MonoBehaviour
         {
             if (stageClear != null)
             {
-                stageClear.stage2clear = true; // 클리어 조건이 충족되면 stage2clear를 true로 설정
-                Transform existingSphere = transform.Find("Sphere");
-                if (existingSphere != null)
-                {
-                    Destroy(existingSphere.gameObject); // 자식 오브젝트 제거
-                    Debug.Log("기존 Sphere 오브젝트가 제거되었습니다.");
-                }
-                else
-                {
-                    Debug.Log("제거할 Sphere 오브젝트가 없습니다.");
-                }
+                // RPC를 사용하여 모든 클라이언트에서 StageClearRPC 호출
+                photonView.RPC("StageClearRPC", RpcTarget.All);
 
                 Debug.Log("스테이지 클리어!");
             }
@@ -187,6 +179,24 @@ public class ColorCounter : MonoBehaviour
         {
             Debug.Log("카운트가 클리어 조건을 초과하여 초기화되었습니다.");
             ResetCounts();
+        }
+    }
+
+    // RPC 메서드로 동기화된 스테이지 클리어 로직 구현
+    [PunRPC]
+    private void StageClearRPC()
+    {
+        stageClear.stage2clear = true; // 클리어 조건이 충족되면 stage2clear를 true로 설정
+
+        Transform existingSphere = transform.Find("Sphere");
+        if (existingSphere != null)
+        {
+            Destroy(existingSphere.gameObject); // 자식 오브젝트 제거
+            Debug.Log("기존 Sphere 오브젝트가 제거되었습니다.");
+        }
+        else
+        {
+            Debug.Log("제거할 Sphere 오브젝트가 없습니다.");
         }
     }
 }
