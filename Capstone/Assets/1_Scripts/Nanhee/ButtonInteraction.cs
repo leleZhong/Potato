@@ -59,10 +59,9 @@ public class ButtonInteraction : MonoBehaviour
     {
         if (other.CompareTag("Interaction") || other.CompareTag("CorrectNumber"))
         {
-            if (interactionUI != null)
-            {
-                interactionUI.SetActive(true); // 상호작용 UI 활성화
-            }
+            
+            interactionUI.SetActive(true); // 상호작용 UI 활성화
+            
 
             // 만약 해당 오브젝트가 CorrectNumber 태그를 가지고 있다면 currentInteractable로 설정
             if (other.CompareTag("CorrectNumber"))
@@ -76,10 +75,9 @@ public class ButtonInteraction : MonoBehaviour
     {
         if (other.CompareTag("Interaction") || other.CompareTag("CorrectNumber"))
         {
-            if (interactionUI != null)
-            {
+           
                 interactionUI.SetActive(false); // 상호작용 UI 비활성화
-            }
+            
 
             // 현재 상호작용 오브젝트가 나가는 오브젝트와 동일한 경우 해제
             if (currentInteractable == other.gameObject)
