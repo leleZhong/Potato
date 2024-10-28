@@ -27,7 +27,7 @@ public class ColorCounter : MonoBehaviour
 
     GameObject mjUI;
 
-    private PhotonView photonView;
+    public PhotonView photonView;
 
     void Awake()
     {

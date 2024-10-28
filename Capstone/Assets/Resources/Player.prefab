@@ -224,6 +224,7 @@ MonoBehaviour:
   countDisplayUI: {fileID: 0}
   colorChanger: {fileID: 0}
   stageClear: {fileID: 0}
+  photonView: {fileID: 5040785663825658260}
 --- !u!114 &3446809170099823096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379,7 +380,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionUI: {fileID: 0}
-  doorAnimator: {fileID: 0}
   button: {fileID: 0}
 --- !u!1 &7683098542305043773
 GameObject:
