@@ -48,6 +48,7 @@ MonoBehaviour:
   - StageClearRPC
   - OnTriggerEnter
   - OnTriggerExit
+  - SetStage3Clear
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

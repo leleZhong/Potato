@@ -5,17 +5,15 @@ using UnityEngine.UI;
 
 public class ButtonInteraction : MonoBehaviour
 {
-    PhotonView photonView;
+    public PhotonView photonView;
 
     public GameObject interactionUI; // 상호작용 UI
     private GameObject currentInteractable; // 현재 상호작용 가능한 오브젝트
     public Button button;
-    private StageClear stageclear;
+    public StageClear stageclear;
 
     void Awake()
     {
-        photonView = GetComponent<PhotonView>();
-
         // InteractionUI 오브젝트 찾기
         interactionUI = GameObject.Find("InteractionUI");
 
@@ -50,13 +48,13 @@ public class ButtonInteraction : MonoBehaviour
 
     void Start()
     {
+        stageclear = FindObjectOfType<StageClear>();
         if (interactionUI != null)
         {
             interactionUI.SetActive(false); // 처음에 UI를 비활성화
         }
     }
 
-    [PunRPC]
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Interaction") || other.CompareTag("CorrectNumber"))
@@ -93,14 +91,13 @@ public class ButtonInteraction : MonoBehaviour
 
     public void OnClickButton()
     {
-        stageclear = GameObject.Find("StageClear").GetComponent<StageClear>();
-
         // currentInteractable이 CorrectNumber 태그를 가지고 있는 경우에만 stage3clear 설정
         if (currentInteractable != null && currentInteractable.CompareTag("CorrectNumber"))
         {
             if (stageclear != null)
             {
-                stageclear.stage3clear = true;
+                // RPC를 통해 모든 클라이언트에 stage3clear 상태를 동기화
+                photonView.RPC("SetStage3Clear", RpcTarget.All);
             }
         }
         else
@@ -110,6 +107,15 @@ public class ButtonInteraction : MonoBehaviour
             {
                 StartCoroutine(ChangeButtonColorTemporarily(Color.red, 3f));
             }
+        }
+    }
+
+    [PunRPC]
+    void SetStage3Clear()
+    {
+        if (stageclear != null)
+        {
+            stageclear.stage3clear = true;
         }
     }
 
