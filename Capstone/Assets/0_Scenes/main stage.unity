@@ -1190,7 +1190,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 54713069}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -1692,7 +1692,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 294357716}
         m_TargetAssemblyTypeName: ButtonInteraction, Assembly-CSharp
         m_MethodName: OnClickButton
         m_Mode: 1
@@ -4460,6 +4460,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e2131326fc97464987f58ebcb08832a, type: 3}
+--- !u!114 &294357716 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2973817467669009297, guid: e291b55c4ed82b44e933665d9289e82f, type: 3}
+  m_PrefabInstance: {fileID: 838838722}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ccad33560e51404781a852baa743378, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &299469071
 PrefabInstance:
   m_ObjectHideFlags: 0
