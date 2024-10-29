@@ -143,20 +143,20 @@ public class ColorCounter : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag(currentTag))
-        {
-            isPlayerInRange = false;
-            currentTag = "";
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.CompareTag(currentTag))
+    //    {
+    //        isPlayerInRange = false;
+    //        currentTag = "";
 
-            // 씬 충돌시 겹치는 비활성화 MJ_UI 전체 비활성화
-            if (mjUI != null)
-            {
-                mjUI.SetActive(false);
-            }
-        }
-    }
+    //        // 씬 충돌시 겹치는 비활성화 MJ_UI 전체 비활성화
+    //        if (mjUI != null)
+    //        {
+    //            mjUI.SetActive(false);
+    //        }
+    //    }
+    //}
     private void CheckStageClearCondition()
     {
         // 클리어 조건 정확히 일치 시

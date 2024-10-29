@@ -55,7 +55,7 @@ public class ButtonInteraction : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Interaction") || other.CompareTag("CorrectNumber"))
         {
@@ -71,7 +71,7 @@ public class ButtonInteraction : MonoBehaviour
         }
     }
 
-    void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Interaction") || other.CompareTag("CorrectNumber"))
         {

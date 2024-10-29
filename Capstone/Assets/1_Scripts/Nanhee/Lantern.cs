@@ -7,7 +7,14 @@ public class Lantern : MonoBehaviour
     private GameObject lantern;      // 상호작용할 랜턴 오브젝트
     private bool isNearLantern = false;
     private bool isHoldingLantern = false;
+    public GameObject LanternUI;
 
+
+    private void Start()
+    {
+        LanternUI = GameObject.Find("LanternUI");
+        LanternUI.SetActive(false);
+    }
     void Update()
     {
         // 'E' 키를 눌렀을 때
@@ -57,6 +64,7 @@ public class Lantern : MonoBehaviour
         {
             isNearLantern = true;
             lantern = other.gameObject;
+            LanternUI.SetActive(true);
         }
     }
 
@@ -66,6 +74,7 @@ public class Lantern : MonoBehaviour
         {
             isNearLantern = false;
             lantern = null;
+            LanternUI.SetActive(false);
         }
     }
 }

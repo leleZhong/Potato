@@ -41,6 +41,7 @@ public class BlockManager : MonoBehaviour
         duplicatedBlock2.transform.parent = tower2Transforms[index2];
         duplicatedBlock2.tag = "CorrectNumber";
         RemoveCollider(duplicatedBlock2);
+        Debug.Log(duplicatedBlock1);
 
         // 타워1에 랜덤하게 그림 할당
         foreach (Transform cubeTransform in tower1Transforms)
