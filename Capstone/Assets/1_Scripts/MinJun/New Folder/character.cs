@@ -26,8 +26,8 @@ public class Character : MonoBehaviour
     float hAxis;     // 키값 받기위한 변수
     float vAxis;     // 키값 받기위한 변수
 
-    float SprintSpeed = 30.0f;                          // 기본 달리는 속도
-    float MoveSpeed = 20.0f;                            // 기본 걷는 속도
+    float SprintSpeed = 10.0f;                          // 기본 달리는 속도
+    float MoveSpeed = 8.0f;                            // 기본 걷는 속도
     float jumppower = 10;                              // 점프세기
 
     bool isBorder;    // 벽관통 막는 변수    

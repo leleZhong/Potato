@@ -17,16 +17,16 @@ public class ColorCounter : MonoBehaviour
     [SerializeField] private int yellowClearCount = 7;
     [SerializeField] private int blueClearCount = 13;
 
-
     [SerializeField] private Transform cameraTransform;
 
     [SerializeField] private TextMeshProUGUI countDisplayUI;
+    [SerializeField] private TextMeshProUGUI interactTextUI;
+    [SerializeField] private TextMeshProUGUI resetTextUI;
 
     [SerializeField] private ColorChanger colorChanger;
-    [SerializeField] private StageClear stageClear; // StageClear 참조
+    [SerializeField] private StageClear stageClear;
 
     GameObject mjUI;
-
     public PhotonView photonView;
 
     void Awake()
@@ -37,6 +37,8 @@ public class ColorCounter : MonoBehaviour
         {
             // TextMeshPro UI 요소 자동 할당
             countDisplayUI = mjUI.transform.Find("countDisplayUI").GetComponent<TextMeshProUGUI>();
+            interactTextUI = mjUI.transform.Find("interactTextUI").GetComponent<TextMeshProUGUI>();
+            resetTextUI = mjUI.transform.Find("resetTextUI").GetComponent<TextMeshProUGUI>();
         }
         else
         {
@@ -46,21 +48,18 @@ public class ColorCounter : MonoBehaviour
 
     void Start()
     {
-        // ColorChanger 오브젝트 자동 할당
         colorChanger = FindObjectOfType<ColorChanger>();
         if (colorChanger == null)
         {
             Debug.LogError("ColorChanger 오브젝트를 찾을 수 없습니다.");
         }
 
-        // StageClear 오브젝트 자동 할당
         stageClear = FindObjectOfType<StageClear>();
         if (stageClear == null)
         {
             Debug.LogError("StageClear 오브젝트를 찾을 수 없습니다.");
         }
 
-        // MJ_UI 전체를 비활성화
         if (mjUI != null)
         {
             mjUI.SetActive(false);
@@ -69,12 +68,10 @@ public class ColorCounter : MonoBehaviour
 
     void Update()
     {
-        // 자식 오브젝트 중 "Sphere"가 있어야지만 조건이 동작
         Transform existingSphere = transform.Find("Sphere");
         if (existingSphere == null)
         {
-            // Debug.Log("Sphere 오브젝트가 없습니다.");
-            return; // Sphere가 없으면 Update 함수 종료
+            return;
         }
 
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.E))
@@ -87,7 +84,6 @@ public class ColorCounter : MonoBehaviour
             ResetCounts();
         }
 
-        // 색상 카운트가 조건을 충족하는지 확인하는 함수 호출
         CheckStageClearCondition();
     }
 
@@ -106,7 +102,7 @@ public class ColorCounter : MonoBehaviour
         else if (currentTag == "green" && currentColor == Color.green)
             greenCount++;
 
-        countDisplayUI.text = GetCountDisplayText(); // 카운트 갱신된 텍스트 UI 표시
+        countDisplayUI.text = GetCountDisplayText();
         Debug.Log(currentColor + " 색상의 카운트가 증가했습니다.");
     }
 
@@ -139,42 +135,58 @@ public class ColorCounter : MonoBehaviour
                 mjUI.SetActive(true);
             }
 
-            countDisplayUI.text = GetCountDisplayText();
+            // 세 개의 텍스트 UI에 내용을 설정하여 화면에 표시
+            if (countDisplayUI != null)
+            {
+                countDisplayUI.text = GetCountDisplayText();
+            }
+            if (interactTextUI != null)
+            {
+                interactTextUI.text = "Press E to increment the color count";
+            }
+            if (resetTextUI != null)
+            {
+                resetTextUI.text = "Press R to reset the counts";
+            }
         }
     }
 
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.CompareTag(currentTag))
-    //    {
-    //        isPlayerInRange = false;
-    //        currentTag = "";
 
-    //        // 씬 충돌시 겹치는 비활성화 MJ_UI 전체 비활성화
-    //        if (mjUI != null)
-    //        {
-    //            mjUI.SetActive(false);
-    //        }
-    //    }
-    //}
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag(currentTag))
+        {
+            isPlayerInRange = false;
+            currentTag = "";
+
+            // 세 개의 텍스트 요소를 모두 숨김
+            if (countDisplayUI != null)
+            {
+                countDisplayUI.text = "";
+            }
+            if (interactTextUI != null)
+            {
+                interactTextUI.text = "";
+            }
+            if (resetTextUI != null)
+            {
+                resetTextUI.text = "";
+            }
+        }
+    }
+
     private void CheckStageClearCondition()
     {
-        // 클리어 조건 정확히 일치 시
         if (redCount == redClearCount && blueCount == blueClearCount && yellowCount == yellowClearCount && greenCount == greenClearCount)
         {
             if (stageClear != null)
             {
-                // RPC를 사용하여 모든 클라이언트에서 StageClearRPC 호출
                 photonView.RPC("StageClearRPC", RpcTarget.All);
-
                 Debug.Log("스테이지 클리어!");
             }
-
-            // 클리어 후 카운트 초기화
             ResetCounts();
         }
 
-        // 하나라도 클리어 조건 초과 시 카운트 초기화
         if (redCount > redClearCount || blueCount > blueClearCount || yellowCount > yellowClearCount || greenCount > greenClearCount)
         {
             Debug.Log("카운트가 클리어 조건을 초과하여 초기화되었습니다.");
@@ -182,16 +194,15 @@ public class ColorCounter : MonoBehaviour
         }
     }
 
-    // RPC 메서드로 동기화된 스테이지 클리어 로직 구현
     [PunRPC]
     private void StageClearRPC()
     {
-        stageClear.stage2clear = true; // 클리어 조건이 충족되면 stage2clear를 true로 설정
+        stageClear.stage2clear = true;
 
         Transform existingSphere = transform.Find("Sphere");
         if (existingSphere != null)
         {
-            Destroy(existingSphere.gameObject); // 자식 오브젝트 제거
+            Destroy(existingSphere.gameObject);
             Debug.Log("기존 Sphere 오브젝트가 제거되었습니다.");
         }
         else

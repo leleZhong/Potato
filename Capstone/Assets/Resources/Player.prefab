@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 8342414707914621803}
   - component: {fileID: 6809808411155229486}
   - component: {fileID: 5040785663825658260}
-  - component: {fileID: 8468215414486967816}
   - component: {fileID: 7734750710346092373}
   - component: {fileID: 4039979115922315637}
   - component: {fileID: 4169013447292154989}
@@ -155,24 +154,6 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &8468215414486967816
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2213006756633148338}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76937c8611288df49a50d21a0be9c073, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explosionForce: 1000
-  explosionRadius: 5
-  upwardsModifier: 1
-  explosionEffectPrefab: {fileID: 6143467867895953418, guid: be01741081bb2c944aad51a527b3e120, type: 3}
-  effectScaleMultiplier: 5
-  effectRotation: {x: 90, y: 0, z: 0}
 --- !u!114 &7734750710346092373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,6 +181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2213006756633148338}
   handTransform: {fileID: 3766957220895074401}
+  LanternUI: {fileID: 0}
 --- !u!114 &4169013447292154989
 MonoBehaviour:
   m_ObjectHideFlags: 0
