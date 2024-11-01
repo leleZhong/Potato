@@ -161,13 +161,15 @@ public class Character : MonoBehaviour
             applySpeed = MoveSpeed;
             PlayFootstepSound(walkVolume, 1.0f);
         }
-
-        // 멈출 때 소리 중지
-        if ((!isMoving || isJump) && audioSource.isPlaying && audioSource.clip == walkSound)
+        
+        if (audioSource != null)
         {
-            audioSource.Stop();
+            // 멈출 때 소리 중지
+            if ((!isMoving || isJump) && audioSource.isPlaying && audioSource.clip == walkSound)
+            {
+                audioSource.Stop();
+            }
         }
-
         anim.SetBool("isRun", isRun);
         anim.SetBool("isWalk", isMoving);
 

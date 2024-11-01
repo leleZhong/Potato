@@ -16942,7 +16942,7 @@ Transform:
   m_GameObject: {fileID: 397075026}
   serializedVersion: 2
   m_LocalRotation: {x: 0.20528011, y: 0.026961802, z: -0.0056573995, w: 0.9783155}
-  m_LocalPosition: {x: 18089.387, y: 34243.023, z: -75284.61}
+  m_LocalPosition: {x: 18721.285, y: 35440.305, z: -77908.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -57471,7 +57471,7 @@ Transform:
   m_GameObject: {fileID: 1234683482}
   serializedVersion: 2
   m_LocalRotation: {x: 0.20528011, y: 0.026961802, z: -0.0056573995, w: 0.9783155}
-  m_LocalPosition: {x: 18089.387, y: 34243.023, z: -75284.61}
+  m_LocalPosition: {x: 18721.285, y: 35440.305, z: -77908.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -89311,10 +89311,18 @@ PrefabInstance:
     - target: {fileID: 544740165453139786, guid: e6c8d9d91f900a7498c0e6dff142da99, type: 3}
       propertyPath: speakerPrefab
       value: 
-      objectReference: {fileID: 2213006756633148338, guid: d7b7bcc580f3f7046b0d5faed4e8f5f9, type: 3}
+      objectReference: {fileID: 4214636862869512524, guid: 4f39c9ecd66fbc240a852c92f5369da3, type: 3}
+    - target: {fileID: 544740165453139786, guid: e6c8d9d91f900a7498c0e6dff142da99, type: 3}
+      propertyPath: usePrimaryRecorder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 544740165453139786, guid: e6c8d9d91f900a7498c0e6dff142da99, type: 3}
       propertyPath: ApplyDontDestroyOnLoad
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1399481646272156598, guid: e6c8d9d91f900a7498c0e6dff142da99, type: 3}
+      propertyPath: samplingRate
+      value: 48000
       objectReference: {fileID: 0}
     - target: {fileID: 1399481646272156598, guid: e6c8d9d91f900a7498c0e6dff142da99, type: 3}
       propertyPath: microphoneType

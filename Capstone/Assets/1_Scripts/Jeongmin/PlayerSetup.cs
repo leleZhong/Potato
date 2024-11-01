@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Voice.PUN;
+using Photon.Voice.Unity;
 
 public class PlayerSetup : MonoBehaviour
 {
     public PhotonView _pv;
+    PhotonVoiceView _voiceView;
+
     Camera _camera;
     AudioListener _al;
 
@@ -13,21 +17,29 @@ public class PlayerSetup : MonoBehaviour
     {
         _al = GetComponentInChildren<AudioListener>();
         _camera = GetComponentInChildren<Camera>();
+        _voiceView = GetComponent<PhotonVoiceView>();
 
-        if (_pv.IsMine)
+        if (PhotonNetwork.IsConnectedAndReady)
         {
-            // 로컬 플레이어의 AudioListener 활성화
-            if (_al != null)
-                _al.enabled = true;
+                if (_pv.IsMine)
+            {
+                // 로컬 플레이어의 AudioListener 활성화
+                if (_al != null)
+                    _al.enabled = true;
 
-            _camera.enabled = true;
-        }
-        else
-        {
-            if (_al != null)
-                _al.enabled = false;
-            
-            _camera.enabled = false;
+                _camera.enabled = true;
+
+                SetupPrimaryRecorder();
+            }
+            else
+            {
+                if (_al != null)
+                    _al.enabled = false;
+                
+                _camera.enabled = false;
+            }
+            StartCoroutine(WaitForVoiceInitialization());
+            StartCoroutine(CheckSpeakerSetupWithDelay());
         }
     }
 
@@ -62,6 +74,40 @@ public class PlayerSetup : MonoBehaviour
                 Debug.Log("Stage Clear");
                 // SceneManager.LoadScene("nextStage");
             }
+        }
+    }
+
+    void SetupPrimaryRecorder()
+    {
+        var recorder = GameObject.Find("RecorderObject").GetComponent<Recorder>();
+        if (PunVoiceClient.Instance != null && recorder != null)
+        {
+            PunVoiceClient.Instance.PrimaryRecorder = recorder;
+            recorder.TransmitEnabled = true;
+            Debug.Log("PrimaryRecorder가 설정되었습니다.");
+        }
+    }
+
+    IEnumerator CheckSpeakerSetupWithDelay()
+    {
+        yield return new WaitForSeconds(1f); // 1초 대기
+        if (_voiceView.SpeakerInUse == null)
+        {
+            Debug.LogWarning("Speaker가 여전히 설정되지 않았습니다.");
+        }
+        else
+        {
+            Debug.Log("Speaker가 설정되었습니다.");
+        }
+    }
+
+    IEnumerator WaitForVoiceInitialization()
+    {
+        yield return new WaitForSeconds(1f); // 1초 대기
+        if (PunVoiceClient.Instance.PrimaryRecorder != null)
+        {
+            PunVoiceClient.Instance.PrimaryRecorder.TransmitEnabled = true;
+            Debug.Log("Voice initialization completed.");
         }
     }
 }
