@@ -53,9 +53,8 @@ public class Character : MonoBehaviour
 
     void Start()
     {
-
         // AudioSource วาด็
-        audioSource = FindAnyObjectByType<AudioSource>();
+        audioSource = GetComponentInChildren<AudioSource>();
         _tf = GetComponent<Transform>();
 
         // if (Camera.main == null)
