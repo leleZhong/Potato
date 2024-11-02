@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class ButtonInteraction : MonoBehaviour
 {
     public PhotonView photonView;
-
     public GameObject interactionUI; // 상호작용 UI
     private GameObject currentInteractable; // 현재 상호작용 가능한 오브젝트
     public Button button;
@@ -53,17 +52,17 @@ public class ButtonInteraction : MonoBehaviour
         {
             interactionUI.SetActive(false); // 처음에 UI를 비활성화
         }
+
+        // 버튼의 OnClick 이벤트에 OnClickButton을 할당
+        SetupButton();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Interaction") || other.CompareTag("CorrectNumber"))
         {
-            
             interactionUI.SetActive(true); // 상호작용 UI 활성화
-            
 
-            // 만약 해당 오브젝트가 CorrectNumber 태그를 가지고 있다면 currentInteractable로 설정
             if (other.CompareTag("CorrectNumber"))
             {
                 currentInteractable = other.gameObject;
@@ -75,11 +74,8 @@ public class ButtonInteraction : MonoBehaviour
     {
         if (other.CompareTag("Interaction") || other.CompareTag("CorrectNumber"))
         {
-           
-                interactionUI.SetActive(false); // 상호작용 UI 비활성화
-            
+            interactionUI.SetActive(false); // 상호작용 UI 비활성화
 
-            // 현재 상호작용 오브젝트가 나가는 오브젝트와 동일한 경우 해제
             if (currentInteractable == other.gameObject)
             {
                 currentInteractable = null;
@@ -89,18 +85,15 @@ public class ButtonInteraction : MonoBehaviour
 
     public void OnClickButton()
     {
-        // currentInteractable이 CorrectNumber 태그를 가지고 있는 경우에만 stage3clear 설정
         if (currentInteractable != null && currentInteractable.CompareTag("CorrectNumber"))
         {
             if (stageclear != null)
             {
-                // RPC를 통해 모든 클라이언트에 stage3clear 상태를 동기화
                 photonView.RPC("SetStage3Clear", RpcTarget.All);
             }
         }
         else
         {
-            // 잘못된 상호작용일 때 버튼을 빨간색으로 변경
             if (button != null && button.targetGraphic != null)
             {
                 StartCoroutine(ChangeButtonColorTemporarily(Color.red, 3f));
@@ -119,13 +112,19 @@ public class ButtonInteraction : MonoBehaviour
 
     private IEnumerator ChangeButtonColorTemporarily(Color color, float duration)
     {
-        // 기존 색상을 저장
         Color originalColor = button.targetGraphic.color;
-        // 색상을 변경
         button.targetGraphic.color = color;
-        // duration만큼 대기
         yield return new WaitForSeconds(duration);
-        // 원래 색상으로 복원
         button.targetGraphic.color = originalColor;
+    }
+
+    // 캐릭터 생성 후 버튼 이벤트를 설정하는 메서드
+    public void SetupButton()
+    {
+        if (button != null)
+        {
+            button.onClick.RemoveAllListeners(); // 기존 리스너 제거
+            button.onClick.AddListener(OnClickButton); // 새 리스너 추가
+        }
     }
 }
