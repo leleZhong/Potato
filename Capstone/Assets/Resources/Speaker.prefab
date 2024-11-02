@@ -146,4 +146,4 @@ MonoBehaviour:
     High: 200
     Max: 1000
     SpeedUpPerc: 5
-  restartOnDeviceChange: 1
+  restartOnDeviceChange: 0
