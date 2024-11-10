@@ -8,6 +8,7 @@ public class BlockManager : MonoBehaviour
     public Transform[] tower2Transforms; // 타워2 위치 배열
     public static GameObject duplicatedBlockPrefab;
     private Collider objectCollider;
+    public static int duplicatedBlockIndex;
 
     void Start()
     {
@@ -29,6 +30,7 @@ public class BlockManager : MonoBehaviour
         availableNumbers.RemoveAt(SelectedDuplicatedNumberIndex); //프리펩리스트에서지움
 
         duplicatedBlockPrefab = blockPrefabs[SelectedDuplicatedNumber];
+        duplicatedBlockIndex = SelectedDuplicatedNumber;
 
         int index1 = Random.Range(0, tower1Transforms.Length); //tower1의 012중에 어디?
         GameObject duplicatedBlock1 = Instantiate(blockPrefabs[SelectedDuplicatedNumber], tower1Transforms[index1].position, Quaternion.identity); //생성
