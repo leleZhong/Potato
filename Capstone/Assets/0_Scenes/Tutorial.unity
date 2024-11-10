@@ -16946,7 +16946,7 @@ Transform:
   m_GameObject: {fileID: 397075026}
   serializedVersion: 2
   m_LocalRotation: {x: 0.20528011, y: 0.026961802, z: -0.0056573995, w: 0.9783155}
-  m_LocalPosition: {x: 21152.951, y: 40047.67, z: -88007.93}
+  m_LocalPosition: {x: 21154.992, y: 40051.54, z: -88016.41}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -57475,7 +57475,7 @@ Transform:
   m_GameObject: {fileID: 1234683482}
   serializedVersion: 2
   m_LocalRotation: {x: 0.20528011, y: 0.026961802, z: -0.0056573995, w: 0.9783155}
-  m_LocalPosition: {x: 21152.543, y: 40046.9, z: -88006.234}
+  m_LocalPosition: {x: 21154.992, y: 40051.54, z: -88016.41}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -95449,140 +95449,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 412966, guid: f18318a9de51f9b4f993559b01c40e15, type: 3}
   m_PrefabInstance: {fileID: 2046244305}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2047552628
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2047552631}
-  - component: {fileID: 2047552630}
-  - component: {fileID: 2047552629}
-  - component: {fileID: 2047552632}
-  m_Layer: 0
-  m_Name: VoiceManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2047552629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2047552628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91175dcc15224463780e01a8a98b1b60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  voiceDetection: 1
-  voiceDetectionThreshold: 0.01
-  voiceDetectionDelayMs: 500
-  interestGroup: 0
-  useTargetPlayers: 0
-  targetPlayers: 
-  debugEchoMode: 0
-  reliableMode: 0
-  encrypt: 0
-  transmitEnabled: 1
-  samplingRate: 48000
-  frameDuration: 20000
-  bitrate: 30000
-  sourceType: 0
-  microphoneType: 0
-  audioClip: {fileID: 0}
-  loopAudioClip: 1
-  recordingEnabled: 1
-  audioSessionParameters:
-    Category: 4
-    Mode: 1
-    CategoryOptions: 0800000004000000
-  editorAudioSessionPreset: 1
-  androidMicrophoneSettings:
-    EnableAEC: 1
-    EnableAGC: 1
-    EnableNS: 1
-  stopRecordingWhenPaused: 0
-  useOnAudioFilterRead: 0
-  useMicrophoneTypeFallback: 1
-  recordWhenJoined: 1
---- !u!114 &2047552630
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2047552628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81d9debcbaf99472bb70ffc2f99cb23f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DisconnectAfterKeepAlive: 0
-  KeepAliveInBackground: 60000
-  ApplyDontDestroyOnLoad: 0
-  runInBackground: 1
-  statsResetInterval: 1000
-  speakerPrefab: {fileID: 4214636862869512524, guid: 4f39c9ecd66fbc240a852c92f5369da3, type: 3}
-  primaryRecorder: {fileID: 2047552629}
-  usePrimaryRecorder: 0
-  cppCompatibilityMode: 0
-  Settings:
-    AppIdRealtime: 
-    AppIdFusion: 
-    AppIdChat: 
-    AppIdVoice: 
-    AppVersion: 
-    UseNameServer: 1
-    FixedRegion: 
-    Server: 
-    Port: 0
-    ProxyServer: 
-    Protocol: 0
-    EnableProtocolFallback: 1
-    AuthMode: 0
-    EnableLobbyStatistics: 0
-    NetworkLogging: 1
-  ShowSettings: 1
-  AutoConnectAndJoin: 1
-  usePunAppSettings: 1
-  usePunAuthValues: 1
---- !u!4 &2047552631
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2047552628}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.119995, y: 3.9397326, z: -79.64018}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2047552632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2047552628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65b99afb3758e9e4689c28a18224eb8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RandomRoom: 1
-  autoConnect: 1
-  publishUserId: 1
-  RoomName: 
 --- !u!1001 &2048675464
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -100135,6 +100001,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bdf242d0c254aeb438d7f3c8ceb916ec, type: 3}
+--- !u!1001 &4483984011513171295
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7283860730119141534, guid: a7f3bd57e86af374da7f2818bddc85b6, type: 3}
+      propertyPath: m_Name
+      value: VoiceManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8647098750211521749, guid: a7f3bd57e86af374da7f2818bddc85b6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 22.119995
+      objectReference: {fileID: 0}
+    - target: {fileID: 8647098750211521749, guid: a7f3bd57e86af374da7f2818bddc85b6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.9397326
+      objectReference: {fileID: 0}
+    - target: {fileID: 8647098750211521749, guid: a7f3bd57e86af374da7f2818bddc85b6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -79.64018
+      objectReference: {fileID: 0}
+    - target: {fileID: 8647098750211521749, guid: a7f3bd57e86af374da7f2818bddc85b6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8647098750211521749, guid: a7f3bd57e86af374da7f2818bddc85b6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8647098750211521749, guid: a7f3bd57e86af374da7f2818bddc85b6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8647098750211521749, guid: a7f3bd57e86af374da7f2818bddc85b6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8647098750211521749, guid: a7f3bd57e86af374da7f2818bddc85b6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8647098750211521749, guid: a7f3bd57e86af374da7f2818bddc85b6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8647098750211521749, guid: a7f3bd57e86af374da7f2818bddc85b6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a7f3bd57e86af374da7f2818bddc85b6, type: 3}
 --- !u!1001 &8411964069377412097
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -101308,4 +101231,4 @@ SceneRoots:
   - {fileID: 3815405912597463572}
   - {fileID: 560153583}
   - {fileID: 168441293}
-  - {fileID: 2047552631}
+  - {fileID: 4483984011513171295}
