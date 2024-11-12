@@ -2,6 +2,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using ExitGames.Client.Photon;
 using UnityEngine;
+using System.Collections;
 
 public class PhotonManager : MonoBehaviourPunCallbacks
 {
@@ -49,12 +50,19 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         Debug.Log("OnPlayerEnteredRoom");
+        StartCoroutine(DelayedCheckAllPlayersReady());
         CheckAllPlayersReady();
+    }
+
+    IEnumerator DelayedCheckAllPlayersReady()
+    {
+    yield return new WaitForSeconds(0.1f); // 짧은 지연 추가
+    CheckAllPlayersReady();
     }
 
     public void SetPlayerReady()
     {
-        Hashtable props = new Hashtable
+        ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable
         {
             { ReadyProperty, true }
         };
