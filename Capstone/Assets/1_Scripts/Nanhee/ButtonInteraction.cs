@@ -10,6 +10,7 @@ public class ButtonInteraction : MonoBehaviour
     private GameObject currentInteractable; // 현재 상호작용 가능한 오브젝트
     public Button button;
     public StageClear stageclear;
+    private GameObject triggeredObject;
 
     void Awake()
     {
@@ -47,6 +48,15 @@ public class ButtonInteraction : MonoBehaviour
 
     void Start()
     {
+        // BlockManager 인스턴스 찾기
+        BlockManager blockManager = FindObjectOfType<BlockManager>();
+        if (blockManager != null && blockManager.correctBlock != null)
+        {
+            currentInteractable = blockManager.correctBlock;
+            Debug.Log($"[ButtonInteraction] CorrectNumber 블록이 currentInteractable로 설정됨: {currentInteractable.name}");
+        }
+
+        // 기존 초기화 로직
         stageclear = FindObjectOfType<StageClear>();
         if (interactionUI != null)
         {
@@ -57,58 +67,105 @@ public class ButtonInteraction : MonoBehaviour
         SetupButton();
     }
 
+
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log($"[TriggerEnter] other.name: {other.gameObject.name}, 태그: {other.tag}");
+
+        // 태그가 null이거나 비어 있는 경우 필터링
+        if (string.IsNullOrEmpty(other.tag))
+        {
+            Debug.LogWarning($"[TriggerEnter] 태그가 Null이거나 비어 있는 오브젝트: {other.gameObject.name}");
+            return; // 처리 중단
+        }
+
         if (other.CompareTag("Interaction") || other.CompareTag("CorrectNumber"))
         {
-            interactionUI.SetActive(true); // 상호작용 UI 활성화
+            interactionUI.SetActive(true);
 
             if (other.CompareTag("CorrectNumber"))
             {
-                currentInteractable = other.gameObject;
+                triggeredObject = other.gameObject;
+                Debug.Log($"[CorrectNumber] triggeredObject 설정: {triggeredObject.name}");
             }
         }
     }
 
+
+
     private void OnTriggerExit(Collider other)
     {
+        Debug.Log($"[TriggerExit] {other.gameObject.name}가 Trigger에서 벗어남");
+
+        if (string.IsNullOrEmpty(other.tag))
+        {
+            Debug.LogWarning($"[TriggerExit] 태그가 Null이거나 비어 있는 오브젝트: {other.gameObject.name}");
+            return;
+        }
+
         if (other.CompareTag("Interaction") || other.CompareTag("CorrectNumber"))
         {
             interactionUI.SetActive(false); // 상호작용 UI 비활성화
 
-            if (currentInteractable == other.gameObject)
+            if (triggeredObject == other.gameObject)
             {
-                currentInteractable = null;
+                Debug.Log("[TriggerExit] triggeredObject 초기화");
+                triggeredObject = null;
             }
         }
     }
 
+
+
+
     public void OnClickButton()
     {
-        if (currentInteractable != null && currentInteractable.CompareTag("CorrectNumber"))
+        if (currentInteractable != null && triggeredObject != null)
         {
-            if (stageclear != null)
+            Debug.Log($"[OnClickButton] currentInteractable: {currentInteractable.name}, 태그: {currentInteractable.tag}");
+            Debug.Log($"[OnClickButton] triggeredObject: {triggeredObject.name}, 태그: {triggeredObject.tag}");
+
+            // 태그가 Null인지 체크
+            if (string.IsNullOrEmpty(currentInteractable.tag) || string.IsNullOrEmpty(triggeredObject.tag))
             {
+                Debug.LogWarning("[OnClickButton] 태그가 Null이거나 비어 있습니다.");
+                return;
+            }
+
+
+            if (triggeredObject.CompareTag("CorrectNumber"))
+            {
+                //if (stageclear != null)
+                //{
                 photonView.RPC("SetStage3Clear", RpcTarget.All);
+                Debug.Log("정답 오브젝트와 상호작용: 스테이지 클리어 처리");
+                //}
             }
         }
         else
         {
+            Debug.LogWarning("[OnClickButton] currentInteractable 또는 triggeredObject가 null입니다.");
             if (button != null && button.targetGraphic != null)
             {
                 StartCoroutine(ChangeButtonColorTemporarily(Color.red, 3f));
+                Debug.Log("오답 오브젝트와 상호작용: 버튼 빨간색");
             }
         }
     }
 
+
+
     [PunRPC]
     void SetStage3Clear()
     {
+        Debug.Log("SetStage3Clear 호출됨");
         if (stageclear != null)
         {
             stageclear.stage3clear = true;
+            Debug.Log("stage3clear 설정 완료");
         }
     }
+
 
     private IEnumerator ChangeButtonColorTemporarily(Color color, float duration)
     {

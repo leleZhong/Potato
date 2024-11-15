@@ -9,6 +9,7 @@ public class BlockManager : MonoBehaviour
     public static GameObject duplicatedBlockPrefab;
     private Collider objectCollider;
     public static int duplicatedBlockIndex;
+    public GameObject correctBlock;
 
     void Start()
     {
@@ -36,6 +37,8 @@ public class BlockManager : MonoBehaviour
         GameObject duplicatedBlock1 = Instantiate(blockPrefabs[SelectedDuplicatedNumber], tower1Transforms[index1].position, Quaternion.identity); //생성
         duplicatedBlock1.transform.parent = tower1Transforms[index1];
         duplicatedBlock1.tag = "CorrectNumber";
+        correctBlock = duplicatedBlock1;
+        Debug.Log($"[BlockManager] CorrectNumber 블록 설정: {correctBlock.name}");
         RemoveCollider(duplicatedBlock1);
 
         int index2 = Random.Range(0, tower2Transforms.Length); //tower2의 012중에 어디?
@@ -75,6 +78,13 @@ public class BlockManager : MonoBehaviour
             RemoveCollider(block);
 
             availableNumbers.RemoveAt(randomIndex);
+
+            if (correctBlock == null)
+            {
+                correctBlock = duplicatedBlock1; // CorrectNumber 블록 저장
+                Debug.Log($"[BlockManager] CorrectBlock 설정 완료: {correctBlock.name}");
+            }
+
         }
     }
 
