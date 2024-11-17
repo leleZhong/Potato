@@ -20,6 +20,10 @@ public class StageClear : MonoBehaviour
 
     public AudioClip doorReverbClip; // Door_Reverb_v1_wav 오디오 클립
 
+    private bool stage1SoundPlayed = false;
+    private bool stage2SoundPlayed = false;
+    private bool stage3SoundPlayed = false;
+
     void Awake()
     {
         photonView = GetComponent<PhotonView>();
@@ -27,17 +31,20 @@ public class StageClear : MonoBehaviour
 
     void Update()
     {
-        if (stage1clear)
+        if (stage1clear && !stage1SoundPlayed)
         {
             photonView.RPC("OpenDoor", RpcTarget.All, 1);
+            stage1SoundPlayed = true; // 사운드 중복 재생 방지
         }
-        if (stage2clear)
+        if (stage2clear && !stage2SoundPlayed)
         {
             photonView.RPC("OpenDoor", RpcTarget.All, 2);
+            stage2SoundPlayed = true; // 사운드 중복 재생 방지
         }
-        if (stage3clear)
+        if (stage3clear && !stage3SoundPlayed)
         {
             photonView.RPC("OpenDoor", RpcTarget.All, 3);
+            stage3SoundPlayed = true; // 사운드 중복 재생 방지
         }
     }
 
