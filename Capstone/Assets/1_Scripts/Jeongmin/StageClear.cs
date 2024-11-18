@@ -18,7 +18,7 @@ public class StageClear : MonoBehaviour
     public GameObject _portal1;
     public GameObject _portal2;
 
-    public AudioClip doorReverbClip; // Door_Reverb_v1_wav 오디오 클립
+    public AudioSource doorReverbClip; // Door_Reverb_v1_wav 오디오 클립
 
     private bool stage1SoundPlayed = false;
     private bool stage2SoundPlayed = false;
@@ -34,16 +34,19 @@ public class StageClear : MonoBehaviour
         if (stage1clear && !stage1SoundPlayed)
         {
             photonView.RPC("OpenDoor", RpcTarget.All, 1);
+            PlayDoorSound(); // 사운드 재생
             stage1SoundPlayed = true; // 사운드 중복 재생 방지
         }
         if (stage2clear && !stage2SoundPlayed)
         {
             photonView.RPC("OpenDoor", RpcTarget.All, 2);
+            PlayDoorSound(); // 사운드 재생
             stage2SoundPlayed = true; // 사운드 중복 재생 방지
         }
         if (stage3clear && !stage3SoundPlayed)
         {
             photonView.RPC("OpenDoor", RpcTarget.All, 3);
+            PlayDoorSound(); // 사운드 재생
             stage3SoundPlayed = true; // 사운드 중복 재생 방지
         }
     }
@@ -56,17 +59,14 @@ public class StageClear : MonoBehaviour
             case 1:
                 _door1[0].SetBool("isClear", true);
                 _door1[1].SetBool("isClear", true);
-                PlayDoorSound(); // 사운드 재생
                 break;
             case 2:
                 _door2[0].SetBool("isClear", true);
                 _door2[1].SetBool("isClear", true);
-                PlayDoorSound(); // 사운드 재생
                 break;
             case 3:
                 _door3[0].SetBool("isClear", true);
                 _door3[1].SetBool("isClear", true);
-                PlayDoorSound(); // 사운드 재생
                 break;
         }
     }
@@ -75,7 +75,7 @@ public class StageClear : MonoBehaviour
     {
         if (doorReverbClip != null)
         {
-            AudioSource.PlayClipAtPoint(doorReverbClip, transform.position); // 오디오 클립 재생
+            doorReverbClip.Play();
         }
     }
 }
