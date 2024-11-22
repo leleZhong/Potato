@@ -48,42 +48,42 @@ public class StageManager : MonoBehaviour
 
     public void StageClear()
     {
-        // Renderer[] rendererP1 = new Renderer[_objectsP1.Length];
-        // Renderer[] rendererP2 = new Renderer[_objectsP2.Length];
+        bool p1AllCorrect = true;
+        bool p2AllCorrect = true;
 
-        // for (int i = 0; i < _objectsP1.Length; i++)
-        // {
-        //     rendererP1[i] = _objectsP1[i].GetComponent<Renderer>();
-        //     rendererP2[i] = _objectsP2[i].GetComponent<Renderer>();
-
-        // }
-
-        // if (_answerP1 == rendererP1 && _answerP2 == rendererP2)
-        // {
-        //     _portalLight.SetActive(true);
-        //     _portal.GetComponent<SphereCollider>().enabled = true;
-            
-        // }
-        // Debug.Log("Stage Clear 호출");
-
+        // P1 퍼즐 검사
         for (int i = 0; i < _objectsP1.Length; i++)
         {
             Renderer rendererP1 = _objectsP1[i].GetComponent<Renderer>();
-            if (rendererP1.material.mainTexture == _answerP1[i].material.mainTexture)
+            // 하나라도 정답이 아니면 p1AllCorrect를 false로 설정
+            if (rendererP1.material.mainTexture != _answerP1[i].material.mainTexture)
             {
-                isP1Correct = true;
+                p1AllCorrect = false;
                 break;
             }
         }
 
+        // P2 퍼즐 검사
         for (int i = 0; i < _objectsP2.Length; i++)
         {
             Renderer rendererP2 = _objectsP2[i].GetComponent<Renderer>();
-            if (rendererP2.material.mainTexture == _answerP2[i].material.mainTexture)
+            // 하나라도 정답이 아니면 p2AllCorrect를 false로 설정
+            if (rendererP2.material.mainTexture != _answerP2[i].material.mainTexture)
             {
-                isP2Correct = true;
+                p2AllCorrect = false;
                 break;
             }
+        }
+
+        // 모든 타일이 정답일 때만 true 설정
+        isP1Correct = p1AllCorrect;
+        isP2Correct = p2AllCorrect;
+
+        // 클리어 조건 확인
+        if (isP1Correct && isP2Correct)
+        {
+            Debug.Log("Stage cleared!");
+            photonView.RPC("SetStageClear", RpcTarget.All, true);
         }
     }
 
