@@ -48,17 +48,13 @@ public class StageManager : MonoBehaviour
 
     public void StageClear()
     {
-        bool p1AllCorrect = true;
-        bool p2AllCorrect = true;
-
         // P1 퍼즐 검사
         for (int i = 0; i < _objectsP1.Length; i++)
         {
             Renderer rendererP1 = _objectsP1[i].GetComponent<Renderer>();
-            // 하나라도 정답이 아니면 p1AllCorrect를 false로 설정
-            if (rendererP1.material.mainTexture != _answerP1[i].material.mainTexture)
+            if (rendererP1.material.mainTexture == _answerP1[i].material.mainTexture)
             {
-                p1AllCorrect = false;
+                isP1Correct = true;
                 break;
             }
         }
@@ -67,23 +63,11 @@ public class StageManager : MonoBehaviour
         for (int i = 0; i < _objectsP2.Length; i++)
         {
             Renderer rendererP2 = _objectsP2[i].GetComponent<Renderer>();
-            // 하나라도 정답이 아니면 p2AllCorrect를 false로 설정
-            if (rendererP2.material.mainTexture != _answerP2[i].material.mainTexture)
+            if (rendererP2.material.mainTexture == _answerP2[i].material.mainTexture)
             {
-                p2AllCorrect = false;
+                isP2Correct = true;
                 break;
             }
-        }
-
-        // 모든 타일이 정답일 때만 true 설정
-        isP1Correct = p1AllCorrect;
-        isP2Correct = p2AllCorrect;
-
-        // 클리어 조건 확인
-        if (isP1Correct && isP2Correct)
-        {
-            Debug.Log("Stage cleared!");
-            photonView.RPC("SetStageClear", RpcTarget.All, true);
         }
     }
 
