@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using Photon.Pun;
 
 public class StageManager : MonoBehaviour
@@ -46,29 +44,24 @@ public class StageManager : MonoBehaviour
         stageClear.stage1clear = isClear;
     }
 
+    bool CheckPuzzle(GameObject[] objects, Renderer[] answers)
+    {
+        for (int i = 0; i < objects.Length; i++)
+        {
+            Renderer renderer = objects[i].GetComponent<Renderer>();
+            if (renderer.material.mainTexture != answers[i].material.mainTexture)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void StageClear()
     {
-        // P1 퍼즐 검사
-        for (int i = 0; i < _objectsP1.Length; i++)
-        {
-            Renderer rendererP1 = _objectsP1[i].GetComponent<Renderer>();
-            if (rendererP1.material.mainTexture == _answerP1[i].material.mainTexture)
-            {
-                isP1Correct = true;
-                break;
-            }
-        }
-
-        // P2 퍼즐 검사
-        for (int i = 0; i < _objectsP2.Length; i++)
-        {
-            Renderer rendererP2 = _objectsP2[i].GetComponent<Renderer>();
-            if (rendererP2.material.mainTexture == _answerP2[i].material.mainTexture)
-            {
-                isP2Correct = true;
-                break;
-            }
-        }
+        // 퍼즐 검사
+        isP1Correct = CheckPuzzle(_objectsP1, _answerP1);
+        isP2Correct = CheckPuzzle(_objectsP2, _answerP2);
     }
 
     void ChangeColor(GameObject[] objects, int[] indices, int step, Texture[] _textures)
@@ -92,7 +85,8 @@ public class StageManager : MonoBehaviour
         }
     }
 
-    public void ButtonClick(int id)
+    [PunRPC]
+    void RPC_ButtonClick(int id)
     {
         switch (id)
         {
@@ -103,7 +97,7 @@ public class StageManager : MonoBehaviour
             case 2002:
                 ResetColor(_objectsP2);
                 break;
-                
+
             // P1 - 플레이어 1의 패턴
             // 정답 : 3-2-1-2-1(파노파초빨)
             case 3001:
@@ -115,7 +109,6 @@ public class StageManager : MonoBehaviour
             case 3003:
                 ChangeColor(_objectsP1, new int[] { 1, 2, 4 }, 1, _texturesRBGY); // 원 3과 원 4
                 break;
-            
 
             // P2 - 플레이어 2의 패턴
             // 정답 : 1-2-3-1-3(초파노파파)
@@ -131,5 +124,10 @@ public class StageManager : MonoBehaviour
         }
         StageClear();
         GameManager.Instance._isAction = false;
+    }
+
+    public void ButtonClick(int id)
+    {
+        photonView.RPC("RPC_ButtonClick", RpcTarget.All, id);
     }
 }
